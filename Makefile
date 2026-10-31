@@ -1,6 +1,7 @@
 .PHONY: serve build index new clean image run-image
 
 PAGEFIND = npx -y pagefind@1.5.2
+PORT ?= 8090
 
 serve: index ## Preview locally with drafts at localhost:1313
 	hugo server -D
@@ -23,5 +24,5 @@ clean: ## Remove build output
 image: ## Build the Docker image
 	docker build -t build-site .
 
-run-image: image ## Run the image at localhost:8080
-	docker run --rm -p 8080:80 build-site
+run-image: image ## Run the image at localhost:$(PORT), e.g. make run-image PORT=9000
+	docker run --rm -p $(PORT):80 build-site

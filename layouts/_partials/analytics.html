@@ -1,0 +1,20 @@
+{{- /* Loads an analytics script when the build sets HUGO_ANALYTICS_SRC.
+  Visit any page with ?analytics=off to stop counting that browser,
+  or ?analytics=on to count it again. */ -}}
+{{- with getenv "HUGO_ANALYTICS_SRC" }}
+<script>
+  (function () {
+    var key = "analytics-off";
+    var choice = new URLSearchParams(location.search).get("analytics");
+    try {
+      if (choice === "off") localStorage.setItem(key, "true");
+      if (choice === "on") localStorage.removeItem(key);
+      if (localStorage.getItem(key) === "true") return;
+    } catch (e) {}
+    var script = document.createElement("script");
+    script.defer = true;
+    script.src = {{ . }};
+    document.head.appendChild(script);
+  })();
+</script>
+{{- end }}

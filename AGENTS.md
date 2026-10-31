@@ -37,7 +37,7 @@ Guides followed: [Google Technical Writing One](https://developers.google.com/te
 - `make serve` builds the search index, then previews at localhost:1313, including drafts. Rerun it to pick up new notes in search.
 - `make new note=<topic>/<slug>` creates a draft note, e.g. `make new note=k8s/container/cgroups`.
 - `make build` builds the site and search index into `public/`.
-- `make run-image` builds the Docker image and serves it at localhost:8080.
+- `make run-image` builds the Docker image and serves it at localhost:8090. Change the port with `make run-image PORT=9000`.
 
 The `Dockerfile` has two stages. The first runs `make build` with pinned Hugo and Node. The second serves `public/` with nginx (`nginx.conf`). The build copies `.git` on purpose, because "Updated" dates come from git history. Keep the Hugo version there in step with the one used locally.
 
@@ -46,6 +46,9 @@ Search uses [Pagefind](https://pagefind.app/) (pinned in the `Makefile`, run wit
 Each topic folder has an `_index.md` with its title.
 
 Notes show "Created" from the `date` front matter, which `make new` fills in. "Updated" comes from the file's last git commit (`enableGitInfo`) and appears only when it's a later day than the created date.
+
+
+Analytics are off unless the build sets `HUGO_ANALYTICS_SRC` to an analytics script URL, which is configured on the host, not in the repo. `layouts/_partials/analytics.html` loads it. Visiting any page with `?analytics=off` stops counting that browser, and `?analytics=on` restores it.
 
 ## Design
 

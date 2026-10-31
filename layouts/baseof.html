@@ -6,6 +6,7 @@
   <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
   <link rel="preload" href="{{ "fonts/libre-baskerville.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+  {{- partial "analytics.html" . }}
   <style>
     @font-face { font-family: "Libre Baskerville"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("{{ "fonts/libre-baskerville.woff2" | relURL }}") format("woff2"); }
     @font-face { font-family: "Libre Baskerville"; font-style: italic; font-weight: 400; font-display: swap; src: url("{{ "fonts/libre-baskerville-italic.woff2" | relURL }}") format("woff2"); }
