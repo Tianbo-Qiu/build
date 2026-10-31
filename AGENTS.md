@@ -37,6 +37,9 @@ Guides followed: [Google Technical Writing One](https://developers.google.com/te
 - `make serve` builds the search index, then previews at localhost:1313, including drafts. Rerun it to pick up new notes in search.
 - `make new note=<topic>/<slug>` creates a draft note, e.g. `make new note=k8s/container/cgroups`.
 - `make build` builds the site and search index into `public/`.
+- `make run-image` builds the Docker image and serves it at localhost:8080.
+
+The `Dockerfile` has two stages. The first runs `make build` with pinned Hugo and Node. The second serves `public/` with nginx (`nginx.conf`). The build copies `.git` on purpose, because "Updated" dates come from git history. Keep the Hugo version there in step with the one used locally.
 
 Search uses [Pagefind](https://pagefind.app/) (pinned in the `Makefile`, run with npx). It indexes only the `<article data-pagefind-body>` of notes and section pages; section pages' child lists are excluded with `data-pagefind-ignore`. Cmd+K (Ctrl+K elsewhere) opens a search overlay, and Pagefind loads only on first use. The Search link goes to the `/search/` page (`content/search.md`, `layouts/search.html`). Both use Pagefind's Component UI, themed through `--pf-*` variables on `body` in `layouts/baseof.html`.
 

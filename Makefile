@@ -1,4 +1,4 @@
-.PHONY: serve build index new clean
+.PHONY: serve build index new clean image run-image
 
 PAGEFIND = npx -y pagefind@1.5.2
 
@@ -19,3 +19,9 @@ new: ## Create a draft note: make new note=k8s/container/cgroups
 
 clean: ## Remove build output
 	rm -rf public resources/_gen static/pagefind .hugo_build.lock
+
+image: ## Build the Docker image
+	docker build -t build-site .
+
+run-image: image ## Run the image at localhost:8080
+	docker run --rm -p 8080:80 build-site

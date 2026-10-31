@@ -1,0 +1,6 @@
+public/
+resources/_gen/
+static/pagefind/
+.hugo_build.lock
+Dockerfile
+.dockerignore
