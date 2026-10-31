@@ -1,9 +1,11 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  <ul>
-    {{ range .Pages.ByTitle }}
-      <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-    {{ end }}
-  </ul>
+  <article{{ if not .IsHome }} data-pagefind-body{{ end }}>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <ul data-pagefind-ignore>
+      {{ range .Pages.ByTitle }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{ end }}
+    </ul>
+  </article>
 {{ end }}

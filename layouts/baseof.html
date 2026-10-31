@@ -5,23 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
   <link rel="preload" href="{{ "fonts/libre-baskerville.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
   <style>
     @font-face { font-family: "Libre Baskerville"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("{{ "fonts/libre-baskerville.woff2" | relURL }}") format("woff2"); }
     @font-face { font-family: "Libre Baskerville"; font-style: italic; font-weight: 400; font-display: swap; src: url("{{ "fonts/libre-baskerville-italic.woff2" | relURL }}") format("woff2"); }
     @font-face { font-family: "Libre Franklin"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("{{ "fonts/libre-franklin.woff2" | relURL }}") format("woff2"); }
     @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("{{ "fonts/jetbrains-mono.woff2" | relURL }}") format("woff2"); }
     :root {
-      --fg: #222; --muted: #666; --bg: #fff; --link: #0645ad; --line: #e5e5e5;
+      color-scheme: light dark;
+      --fg: #222; --muted: #666; --bg: #fff; --link: #0645ad; --line: #e5e5e5; --code-bg: #f6f6f6;
       --serif: "Libre Baskerville", Georgia, serif;
       --sans: "Libre Franklin", system-ui, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     }
     @media (prefers-color-scheme: dark) {
-      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; }
+      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; }
     }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.75 var(--serif); }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    article a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
     p { margin: 0 0 1.1em; }
     h1, h2, h3 { font-family: var(--sans); font-weight: 600; line-height: 1.2; }
     h2 { margin: 2em 0 .6em; font-size: 1.4rem; }
@@ -29,6 +32,14 @@
     code, pre { font-family: var(--mono); font-size: .85em; }
     .layout { display: grid; grid-template-columns: 15rem minmax(0, 36rem); gap: 3rem; padding: 2rem; }
     nav .home { display: inline-block; margin-bottom: .4rem; }
+    nav .search { display: block; width: fit-content; padding: .15rem 0; margin-bottom: .6rem; }
+    nav .search kbd { display: inline-block; margin-left: .4rem; color: var(--muted); font: .8em var(--sans); }
+    /* Pagefind sets its defaults on :root, so the overrides go on body. */
+    body {
+      --pf-font: var(--sans); --pf-text: var(--fg); --pf-text-secondary: var(--fg); --pf-text-muted: var(--muted);
+      --pf-background: var(--bg); --pf-border: var(--line); --pf-border-focus: var(--muted); --pf-hover: var(--line); --pf-mark: var(--fg);
+      --pf-border-radius: 0; --pf-shadow-sm: none; --pf-shadow-md: none; --pf-shadow-lg: none;
+    }
     nav { font: .9rem/1.6 var(--sans); }
     nav .home { color: var(--fg); font-weight: 600; }
     nav ul { list-style: none; margin: 0; padding-left: 1rem; }
@@ -39,16 +50,21 @@
     .skip:focus { left: 1rem; top: 1rem; padding: .25rem .5rem; background: var(--bg); font-family: var(--sans); }
     main { overflow-wrap: break-word; }
     img, video { max-width: 100%; height: auto; }
-    table { display: block; overflow-x: auto; border-collapse: collapse; }
+    table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.1em; }
+    th, td { padding: .35rem 1.25rem .35rem 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { font: 600 .9em/1.6 var(--sans); }
     .crumbs { color: var(--muted); font: .85rem/1.6 var(--sans); }
     .crumbs a { color: var(--muted); }
     h1 { margin: .25rem 0 1.2rem; font-size: 2rem; }
-    pre { overflow-x: auto; padding: .75rem; border: 1px solid var(--line); line-height: 1.5; }
+    pre { overflow-x: auto; margin: 0 0 1.1em; padding: .75rem 1rem; background: var(--code-bg); line-height: 1.5; tab-size: 4; }
     pre code { font-size: 1em; }
     @media (max-width: 48rem) {
       .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 1rem; }
       nav { border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
       nav > ul { display: none; }
+      nav { display: flex; justify-content: space-between; align-items: baseline; }
+      nav .home, nav .search { margin: 0; }
+      nav .search kbd { display: none; }
       .crumbs { font-size: .95rem; line-height: 2; }
     }
   </style>
@@ -58,6 +74,7 @@
   <div class="layout">
     <nav>
       <a class="home" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+      <a class="search" id="search-link" href="{{ "search/" | relURL }}"{{ if eq .Layout "search" }} aria-current="page"{{ end }}>Search</a>
       {{ partial "tree.html" (dict "section" site.Home "current" .) }}
     </nav>
     <main id="main">
@@ -69,5 +86,44 @@
       {{ block "main" . }}{{ end }}
     </main>
   </div>
+  <script>
+    // Cmd+K / Ctrl+K opens a search overlay. Pagefind loads on first use.
+    (function () {
+      var base = "{{ "pagefind/" | relURL }}";
+      var link = document.getElementById("search-link");
+      var onSearchPage = {{ eq .Layout "search" }};
+      var ready;
+
+      if (/Mac|iP(hone|ad)/.test(navigator.platform)) link.insertAdjacentHTML("beforeend", "<kbd>⌘K</kbd>");
+      else link.insertAdjacentHTML("beforeend", "<kbd>Ctrl K</kbd>");
+
+      function modal() {
+        if (!ready) {
+          var css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = base + "pagefind-component-ui.css";
+          var js = document.createElement("script");
+          js.type = "module";
+          js.src = base + "pagefind-component-ui.js";
+          var el = document.createElement("pagefind-modal");
+          el.setAttribute("instance", "modal");
+          document.head.append(css, js);
+          document.body.append(el);
+          ready = customElements.whenDefined("pagefind-modal").then(function () { return el; });
+        }
+        return ready;
+      }
+
+      function open(event) {
+        event.preventDefault();
+        if (onSearchPage) { document.querySelector("#search input").focus(); return; }
+        modal().then(function (el) { el.open(); });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") open(event);
+      });
+    })();
+  </script>
 </body>
 </html>

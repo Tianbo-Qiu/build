@@ -1,3 +1,7 @@
 baseURL = '/'
 locale = 'en-us'
 title = 'Build'
+disableKinds = ['taxonomy', 'term']
+
+[markup.highlight]
+  noClasses = false
