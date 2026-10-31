@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <style>
+    body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.6 system-ui, sans-serif; }
+    pre { overflow-x: auto; padding: .75rem; }
+    @media (prefers-color-scheme: dark) { body { background: #111; color: #ddd; } a { color: #8ab4f8; } }
+  </style>
+</head>
+<body>
+  <header><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></header>
+  <main>{{ block "main" . }}{{ end }}</main>
+</body>
+</html>
