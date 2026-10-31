@@ -35,7 +35,7 @@ Guides followed: [Google Technical Writing One](https://developers.google.com/te
 ## Site
 
 - `make serve` previews at localhost:1313, including drafts.
-- `make new name=<slug>` creates a draft note in `content/notes/`.
+- `make new note=<topic>/<slug>` creates a draft note, e.g. `make new note=k8s/container/cgroups`.
 - `make build` builds into `public/`.
 
 Each topic folder has an `_index.md` with its title.

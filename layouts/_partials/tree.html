@@ -1,0 +1,12 @@
+{{- $current := .current }}
+<ul>
+  {{- range .section.Sections.ByTitle }}
+    <li>
+      <a href="{{ .RelPermalink }}"{{ if $current.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
+      {{- partial "tree.html" (dict "section" . "current" $current) }}
+    </li>
+  {{- end }}
+  {{- range .section.RegularPages.ByTitle }}
+    <li><a href="{{ .RelPermalink }}"{{ if $current.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+  {{- end }}
+</ul>

@@ -5,13 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
   <style>
-    body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.6 system-ui, sans-serif; }
-    pre { overflow-x: auto; padding: .75rem; }
-    @media (prefers-color-scheme: dark) { body { background: #111; color: #ddd; } a { color: #8ab4f8; } }
+    :root { --fg: #222; --muted: #777; --bg: #fff; --link: #0645ad; --line: #e5e5e5; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; }
+    }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; padding: 2rem; }
+    nav { font-size: .95rem; }
+    nav .home { color: var(--fg); font-weight: 600; }
+    nav ul { list-style: none; margin: .25rem 0; padding-left: 1rem; }
+    nav > ul { padding-left: 0; }
+    nav a[aria-current] { color: var(--fg); font-weight: 600; }
+    .crumbs { color: var(--muted); font-size: .9rem; }
+    .crumbs a { color: var(--muted); }
+    h1 { margin-top: .25rem; line-height: 1.25; }
+    pre { overflow-x: auto; padding: .75rem; border: 1px solid var(--line); }
+    @media (max-width: 48rem) {
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 1rem; }
+      nav { border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <header><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></header>
-  <main>{{ block "main" . }}{{ end }}</main>
+  <div class="layout">
+    <nav>
+      <a class="home" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+      {{ partial "tree.html" (dict "section" site.Home "current" .) }}
+    </nav>
+    <main>
+      {{- if not .IsHome }}
+        <div class="crumbs">
+          {{- range $i, $p := .Ancestors.Reverse }}{{ if not $p.IsHome }}{{ if gt $i 1 }} › {{ end }}<a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>{{ end }}{{ end -}}
+        </div>
+      {{- end }}
+      {{ block "main" . }}{{ end }}
+    </main>
+  </div>
 </body>
 </html>
