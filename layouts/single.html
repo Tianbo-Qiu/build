@@ -1,6 +1,14 @@
 {{ define "main" }}
   <article data-pagefind-body>
     <h1>{{ .Title }}</h1>
+    {{- $created := .Date.Format "2006-01-02" }}
+    {{- $updated := .Lastmod.Format "2006-01-02" }}
+    {{- if not .Date.IsZero }}
+      <p class="dates" data-pagefind-ignore>
+        Created <time datetime="{{ $created }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{- if and (not .Lastmod.IsZero) (gt $updated $created) }} · Updated <time datetime="{{ $updated }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time>{{ end }}
+      </p>
+    {{- end }}
     {{ .Content }}
   </article>
 {{ end }}

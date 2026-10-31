@@ -3,5 +3,11 @@ locale = 'en-us'
 title = 'Build'
 disableKinds = ['taxonomy', 'term']
 
+# Updated dates come from each file's last git commit.
+enableGitInfo = true
+
+[frontmatter]
+  lastmod = [':git', 'lastmod', ':fileModTime']
+
 [markup.highlight]
   noClasses = false

@@ -42,6 +42,8 @@ Search uses [Pagefind](https://pagefind.app/) (pinned in the `Makefile`, run wit
 
 Each topic folder has an `_index.md` with its title.
 
+Notes show "Created" from the `date` front matter, which `make new` fills in. "Updated" comes from the file's last git commit (`enableGitInfo`) and appears only when it's a later day than the created date.
+
 ## Design
 
 The UI is deliberately plain. Keep it that way: no toggles, menus, or JavaScript unless asked.
