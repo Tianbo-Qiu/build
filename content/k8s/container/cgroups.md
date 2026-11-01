@@ -1,6 +1,6 @@
 +++
 title = 'cgroups'
-date = '2026-10-31'
+date = '2026-11-01T03:50:50Z'
 +++
 
 A cgroup (control group) is a Linux kernel feature that puts processes in a group and limits how much of a resource, such as CPU time or memory, the group can use.

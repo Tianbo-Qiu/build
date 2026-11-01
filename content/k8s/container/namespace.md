@@ -1,6 +1,6 @@
 +++
 title = 'Namespaces'
-date = '2026-10-31'
+date = '2026-10-31T21:05:01Z'
 +++
 
 A namespace is a Linux kernel feature that gives a group of processes their own instance of one system resource, such as process IDs, network interfaces, or the hostname.

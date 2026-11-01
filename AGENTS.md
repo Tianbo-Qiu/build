@@ -45,7 +45,9 @@ Search uses [Pagefind](https://pagefind.app/) (pinned in the `Makefile`, run wit
 
 Each topic folder has an `_index.md` with its title.
 
-Notes show "Created" from the `date` front matter, which `make new` fills in. "Updated" comes from the file's last git commit (`enableGitInfo`) and appears only when it's a later day than the created date.
+Notes show "Created" from the `date` front matter, a UTC time that `make new` fills in. "Updated" comes from the file's last git commit (`enableGitInfo`) and appears only when it's a later UTC day than the created date. Pages render both in UTC, and a short script rewrites them in the reader's time zone.
+
+In the tree and on section pages, subtopics sort by title and notes sort by created time, oldest first.
 
 
 Analytics are off unless the build sets `HUGO_ANALYTICS_SRC` to an analytics script URL, which is configured on the host, not in the repo. `layouts/_partials/analytics.html` loads it. Visiting any page with `?analytics=off` stops counting that browser, and `?analytics=on` restores it.

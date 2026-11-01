@@ -3,7 +3,10 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     <ul data-pagefind-ignore>
-      {{ range .Pages.ByTitle }}
+      {{ range .Sections.ByTitle }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{ end }}
+      {{ range .RegularPages.ByDate }}
         <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
       {{ end }}
     </ul>

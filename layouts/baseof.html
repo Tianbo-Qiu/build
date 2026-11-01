@@ -92,6 +92,11 @@
     </main>
   </div>
   <script>
+    // Dates are stored in UTC and shown in the reader's time zone.
+    document.querySelectorAll(".dates time").forEach(function (el) {
+      el.textContent = new Date(el.dateTime).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+    });
+
     // Cmd+K / Ctrl+K opens a search overlay. Pagefind loads on first use.
     (function () {
       var base = "{{ "pagefind/" | relURL }}";

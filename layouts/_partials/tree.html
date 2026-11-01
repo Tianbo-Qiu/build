@@ -6,7 +6,7 @@
       {{- partial "tree.html" (dict "section" . "current" $current) }}
     </li>
   {{- end }}
-  {{- range .section.RegularPages.ByTitle }}
+  {{- range .section.RegularPages.ByDate }}
     <li><a href="{{ .RelPermalink }}"{{ if $current.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
   {{- end }}
 </ul>
