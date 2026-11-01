@@ -64,6 +64,8 @@ The UI is deliberately plain. Keep it that way: no toggles, menus, or JavaScript
 - Links inside notes are underlined, because color alone isn't enough to mark them. Navigation links aren't underlined.
 - Code blocks use flat grey backgrounds. Syntax colors come from `static/css/syntax.css`, generated with `hugo gen chromastyles` (`github` for light, `github-dark` for dark, each scoped to its color mode, backgrounds removed).
 
+- The site mark is a triangle of three blue scan-line pieces. `static/favicon.svg` is the source; `favicon.ico` (32px), `apple-touch-icon.png` (180px, white background), and `icon-512.png` (profile picture) are rendered from it.
+
 All other styles live in `layouts/baseof.html`. After a UI change, check light mode, dark mode, and phone width.
 
 ## Git
