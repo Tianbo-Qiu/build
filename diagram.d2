@@ -1,0 +1,54 @@
+# Shared style for every diagram. make diagrams prepends this file to each
+# content/**/*.d2 source. Colors match the site's tokens in baseof.html.
+vars: {
+  d2-config: {
+    layout-engine: dagre
+    theme-id: 0
+    dark-theme-id: 200
+    pad: 8
+    theme-overrides: {
+      N1: "#222222"
+      N2: "#444444"
+      N3: "#666666"
+      N4: "#999999"
+      N5: "#cccccc"
+      N6: "#e5e5e5"
+      N7: "#ffffff"
+      B1: "#222222"
+      B2: "#666666"
+      B3: "#999999"
+      B4: "#f6f6f6"
+      B5: "#fafafa"
+      B6: "#ffffff"
+      AA2: "#666666"
+      AA4: "#f6f6f6"
+      AA5: "#fafafa"
+      AB4: "#f6f6f6"
+      AB5: "#fafafa"
+    }
+    dark-theme-overrides: {
+      N1: "#dddddd"
+      N2: "#bbbbbb"
+      N3: "#999999"
+      N4: "#666666"
+      N5: "#444444"
+      N6: "#333333"
+      N7: "#111111"
+      B1: "#dddddd"
+      B2: "#999999"
+      B3: "#666666"
+      B4: "#1a1a1a"
+      B5: "#161616"
+      B6: "#111111"
+      AA2: "#999999"
+      AA4: "#1a1a1a"
+      AA5: "#161616"
+      AB4: "#1a1a1a"
+      AB5: "#161616"
+    }
+  }
+}
+
+# Larger text so labels stay readable when the diagram shrinks on phones.
+**.style.font-size: 22
+**.style.bold: false

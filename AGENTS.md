@@ -30,6 +30,8 @@ Accuracy:
 
 To show a short definition of a term on hover, tap, or keyboard focus, add it to `data/glossary.toml` and write `{{< term kubelet >}}` in the note, or `{{< term kubelet "Kubelet" >}}` to show different text. Mark only terms the note relies on but doesn't explain, and only where the term first appears. Glossary definitions follow the same accuracy rules as notes.
 
+Diagrams are written in [D2](https://d2lang.com/). A note with a diagram is a folder (`content/k8s/architecture/index.md`) holding the `.d2` source and the rendered `.svg`, shown with a Markdown image whose alt text describes the diagram in words. Run `make diagrams` after changing a `.d2` file and commit both files; the site build doesn't need D2. `diagram.d2` at the repo root holds the shared style (dagre layout, the site's greys, light and dark) and is prepended to every source, so diagrams don't set colors. Add a diagram only when a picture shows structure that prose can't, and keep labels short.
+
 References go on the last line and point to primary sources only, never to the book or course being studied.
 
 Guides followed: [Google Technical Writing One](https://developers.google.com/tech-writing/one), [Google developer documentation style guide](https://developers.google.com/style), [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/), and [Diátaxis explanation](https://diataxis.fr/explanation/).
@@ -39,6 +41,7 @@ Guides followed: [Google Technical Writing One](https://developers.google.com/te
 - `make serve` builds the search index, then previews at localhost:1313, including drafts. Rerun it to pick up new notes in search.
 - `make new note=<topic>/<slug>` creates a draft note, e.g. `make new note=k8s/container/cgroups`.
 - `make build` builds the site and search index into `public/`.
+- `make diagrams` renders each changed `.d2` file under `content/` to an `.svg` beside it. It needs `d2` installed locally (`brew install d2`).
 - `make run-image` builds the Docker image and serves it at localhost:8090. Change the port with `make run-image PORT=9000`.
 
 The `Dockerfile` has two stages. The first runs `make build` with pinned Hugo and Node. The second serves `public/` with nginx (`nginx.conf`). The build copies `.git` on purpose, because "Updated" dates come from git history. Keep the Hugo version there in step with the one used locally.

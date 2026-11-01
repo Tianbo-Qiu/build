@@ -24,3 +24,19 @@ def = 'A Linux kernel security feature that limits what a program can do. A prof
 [selinux]
 name = 'SELinux'
 def = 'A Linux kernel security feature, first developed by the NSA, that labels every process and resource. An access is allowed only if the policy permits that pair of labels.'
+
+[kubectl]
+name = 'kubectl'
+def = 'The command-line tool for working with a Kubernetes cluster. It sends requests to the API server.'
+
+[service]
+name = 'Service'
+def = 'A Kubernetes object that gives a set of pods one stable network address and spreads traffic among them.'
+
+[deployment]
+name = 'Deployment'
+def = 'A Kubernetes object that keeps a chosen number of identical pods running and replaces them gradually when you change them.'
+
+[replicaset]
+name = 'ReplicaSet'
+def = 'A Kubernetes object that keeps a chosen number of identical pods running. Deployments create and manage ReplicaSets.'

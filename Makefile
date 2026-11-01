@@ -1,7 +1,8 @@
-.PHONY: serve build index new clean image run-image
+.PHONY: serve build index new clean image run-image diagrams
 
 PAGEFIND = npx -y pagefind@1.5.2
 PORT ?= 8090
+DIAGRAMS = $(patsubst %.d2,%.svg,$(shell find content -name '*.d2'))
 
 serve: index ## Preview locally with drafts at localhost:1313
 	hugo server -D
@@ -26,3 +27,8 @@ image: ## Build the Docker image
 
 run-image: image ## Run the image at localhost:$(PORT), e.g. make run-image PORT=9000
 	docker run --rm -p $(PORT):80 build-site
+
+diagrams: $(DIAGRAMS) ## Render each content/**/*.d2 to an .svg beside it
+
+%.svg: %.d2 diagram.d2
+	cat diagram.d2 $< | d2 --omit-version - $@

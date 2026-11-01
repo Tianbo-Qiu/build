@@ -3,6 +3,9 @@ locale = 'en-us'
 title = 'Build'
 disableKinds = ['taxonomy', 'term']
 
+# Diagram sources; only the rendered .svg is published.
+ignoreFiles = ['\.d2$']
+
 # Updated dates come from each file's last git commit.
 enableGitInfo = true
 

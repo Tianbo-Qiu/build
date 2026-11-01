@@ -1,0 +1,28 @@
+direction: right
+
+kubectl: kubectl
+
+control-plane: Control plane {
+  scheduler: Scheduler
+  controllers: Controller manager
+  api: API server
+  etcd: etcd {shape: cylinder}
+
+  scheduler -> api
+  controllers -> api
+  api -> etcd
+}
+
+node: Node {
+  style.multiple: true
+  kubelet: kubelet
+  proxy: kube-proxy
+  runtime: Container runtime
+  pods: Pods {style.multiple: true}
+
+  kubelet -> runtime -> pods
+}
+
+kubectl -> control-plane.api
+node.kubelet -> control-plane.api
+node.proxy -> control-plane.api
