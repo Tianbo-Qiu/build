@@ -1,8 +1,11 @@
 # Short definitions shown when a reader hovers or focuses a term.
 # Use one in a note with {{< term kubelet >}} or {{< term kubelet "Kubelet" >}}.
+# All entries are listed on /glossary/. Set note to the page that explains
+# the term in full, and the glossary links to it.
 
 [kubelet]
 name = 'kubelet'
+note = '/k8s/architecture'
 def = 'The agent that runs on each node in a Kubernetes cluster and makes sure the containers in its pods are running.'
 
 [container-runtime]
@@ -11,6 +14,7 @@ def = 'The software on a node that runs containers. It pulls images and asks the
 
 [node]
 name = 'node'
+note = '/k8s/architecture'
 def = 'A machine, physical or virtual, that runs pods in a Kubernetes cluster.'
 
 [pod]
@@ -43,14 +47,17 @@ def = 'A Kubernetes object that keeps a chosen number of identical pods running.
 
 [kubeadm]
 name = 'kubeadm'
+note = '/k8s/local-clusters'
 def = 'A Kubernetes tool that sets up a cluster: it starts the control plane on one machine and joins other machines to it as nodes.'
 
 [static-pod]
 name = 'static pod'
+note = '/k8s/local-clusters'
 def = 'A pod that the kubelet starts from a manifest file on its node, without the API server. kubeadm runs the control plane this way.'
 
 [kubeconfig]
 name = 'kubeconfig'
+note = '/k8s/local-clusters'
 def = 'A file that tells kubectl which clusters exist, how to reach and trust their API servers, and which credentials to use.'
 
 [k8s-namespace]

@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <article data-pagefind-body>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{- $terms := slice }}
+    {{- range $id, $entry := site.Data.glossary }}
+      {{- $terms = $terms | append (dict "id" $id "key" (lower $entry.name) "entry" $entry) }}
+    {{- end }}
+    <dl class="glossary">
+      {{- range sort $terms "key" }}
+        <dt id="{{ .id }}">{{ .entry.name }}</dt>
+        <dd>
+          {{ .entry.def }}
+          {{- with .entry.note }}
+            {{- with site.GetPage . }} See <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>.{{ else }}{{ errorf "data/glossary.toml: no page %q" . }}{{ end }}
+          {{- end }}
+        </dd>
+      {{- end }}
+    </dl>
+  </article>
+{{ end }}
