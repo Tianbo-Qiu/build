@@ -1,0 +1,32 @@
+grid-rows: 3
+grid-gap: 40
+
+you: Your computer {
+  kubectl: kubectl
+}
+
+provider: Cloud provider's infrastructure {
+  grid-columns: 2
+  grid-gap: 24
+  api: API server
+  others: "etcd, scheduler,\ncontroller manager,\ncloud-controller-manager"
+}
+
+account: Your cloud account {
+  grid-columns: 2
+  grid-gap: 24
+  n1: Node VM {
+    kubelet: kubelet
+    pods: Pods
+    kubelet -> pods
+  }
+  n2: Node VM {
+    kubelet: kubelet
+    pods: Pods
+    kubelet -> pods
+  }
+}
+
+you.kubectl -> provider.api
+account.n1.kubelet -> provider.api
+account.n2.kubelet -> provider.api

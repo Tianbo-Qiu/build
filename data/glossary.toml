@@ -63,3 +63,8 @@ def = 'A file that tells kubectl which clusters exist, how to reach and trust th
 [k8s-namespace]
 name = 'namespace (Kubernetes)'
 def = 'A named group of objects inside a Kubernetes cluster, used to keep teams or apps apart. Unrelated to Linux namespaces.'
+
+[cloud-controller-manager]
+name = 'cloud-controller-manager'
+note = '/k8s/managed-clusters'
+def = 'An optional control plane component that connects a cluster to a cloud provider, for example to create load balancers and to track the virtual machines behind nodes.'
