@@ -15,6 +15,6 @@ A container is one or more processes running in their own set of namespaces on t
 
 For example, suppose you start two nginx web server containers on the same host. By default, Docker puts each one in new namespaces of most types, including PID, network, and mount. Inside each container, the main nginx process is process 1, it sees only its own network interfaces and IP address, and the files from its image make up its whole filesystem. Both containers can listen on port 80 at the same time, because each port belongs to a different network namespace. On the host, they're just two more nginx processes with ordinary process IDs.
 
-Namespaces don't limit how much CPU or memory processes use. That's a separate kernel feature, cgroups.
+Namespaces don't limit how much CPU or memory processes use. That's a separate kernel feature, [cgroups]({{< ref "cgroups" >}}).
 
 References: [namespaces(7)](https://man7.org/linux/man-pages/man7/namespaces.7.html), [cgroups(7)](https://man7.org/linux/man-pages/man7/cgroups.7.html)
