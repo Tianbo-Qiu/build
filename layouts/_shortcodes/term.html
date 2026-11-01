@@ -1,0 +1,7 @@
+{{- /* A glossary term with its definition on hover or focus.
+  {{< term kubelet >}} shows the entry's name; {{< term kubelet "Kubelet" >}} shows other text. */ -}}
+{{- $id := .Get 0 }}
+{{- $entry := index site.Data.glossary $id }}
+{{- if not $entry }}{{ errorf "%s: no glossary entry %q in data/glossary.toml" .Position $id }}{{ end }}
+{{- $tip := printf "term-%s-%d" $id .Ordinal -}}
+<span class="term" tabindex="0" aria-describedby="{{ $tip }}">{{ .Get 1 | default $entry.name }}<span class="tip" id="{{ $tip }}" role="tooltip" data-pagefind-ignore><b>{{ $entry.name }}</b> {{ $entry.def }}</span></span>

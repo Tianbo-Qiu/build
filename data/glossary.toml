@@ -1,0 +1,26 @@
+# Short definitions shown when a reader hovers or focuses a term.
+# Use one in a note with {{< term kubelet >}} or {{< term kubelet "Kubelet" >}}.
+
+[kubelet]
+name = 'kubelet'
+def = 'The agent that runs on each node in a Kubernetes cluster and makes sure the containers in its pods are running.'
+
+[container-runtime]
+name = 'container runtime'
+def = 'The software on a node that runs containers. It pulls images and asks the kernel to set up each container.'
+
+[node]
+name = 'node'
+def = 'A machine, physical or virtual, that runs pods in a Kubernetes cluster.'
+
+[pod]
+name = 'pod'
+def = 'The smallest unit Kubernetes runs: one or more containers that run on the same node and share some resources, such as a network namespace.'
+
+[apparmor]
+name = 'AppArmor'
+def = 'A Linux kernel security feature that limits what a program can do. A profile, matched to the program by its file path, lists the files, capabilities, and network access it may use.'
+
+[selinux]
+name = 'SELinux'
+def = 'A Linux kernel security feature, first developed by the NSA, that labels every process and resource. An access is allowed only if the policy permits that pair of labels.'

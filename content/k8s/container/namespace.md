@@ -9,7 +9,7 @@ Namespaces let programs on the same machine run without seeing or interfering wi
 
 A process learns about the system only by asking the kernel. The kernel tracks which namespaces each process belongs to and answers within them. For example, in a new PID namespace, process IDs start again at 1, and processes inside can't see processes outside. The parent namespace still sees each of them, under a different ID.
 
-Linux has eight namespace types: PID, network, mount, UTS (hostname), user, IPC, time, and cgroup. Each process belongs to exactly one namespace of each type, so two processes can share some namespaces and not others. For example, the containers in a Kubernetes pod share a network namespace, so they can reach each other on `localhost`, but each has its own mount namespace and so its own view of the filesystem.
+Linux has eight namespace types: PID, network, mount, UTS (hostname), user, IPC, time, and cgroup. Each process belongs to exactly one namespace of each type, so two processes can share some namespaces and not others. For example, the containers in a Kubernetes {{< term pod >}} share a network namespace, so they can reach each other on `localhost`, but each has its own mount namespace and so its own view of the filesystem.
 
 A container is one or more processes running in their own set of namespaces on the host's kernel. Container runtimes such as Docker ask the kernel to create the namespaces, and the kernel does the isolation.
 

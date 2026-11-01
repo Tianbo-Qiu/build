@@ -28,6 +28,8 @@ Accuracy:
 - Prefer precise words: "process", not "program"; "instance", not "copy" when it isn't one.
 - Don't overgeneralize. If a detail holds only by default or only in one case, say so.
 
+To show a short definition of a term on hover, tap, or keyboard focus, add it to `data/glossary.toml` and write `{{< term kubelet >}}` in the note, or `{{< term kubelet "Kubelet" >}}` to show different text. Mark only terms the note relies on but doesn't explain, and only where the term first appears. Glossary definitions follow the same accuracy rules as notes.
+
 References go on the last line and point to primary sources only, never to the book or course being studied.
 
 Guides followed: [Google Technical Writing One](https://developers.google.com/tech-writing/one), [Google developer documentation style guide](https://developers.google.com/style), [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/), and [Diátaxis explanation](https://diataxis.fr/explanation/).
@@ -64,6 +66,7 @@ The UI is deliberately plain. Keep it that way: no toggles, menus, or JavaScript
 - Keep WCAG AA: text contrast at least 4.5:1, link targets at least 24px tall.
 
 - Links inside notes are underlined, because color alone isn't enough to mark them. Navigation links aren't underlined.
+- Glossary terms have a muted dashed underline. Their definition box is flat, with a border and no shadow, and stays inside the screen. Escape closes it.
 - Code blocks use flat grey backgrounds. Syntax colors come from `static/css/syntax.css`, generated with `hugo gen chromastyles` (`github` for light, `github-dark` for dark, each scoped to its color mode, backgrounds removed).
 
 - The site mark is a triangle of three blue scan-line pieces. `static/favicon.svg` is the source; `favicon.ico` (32px), `apple-touch-icon.png` (180px, white background), and `icon-512.png` (profile picture) are rendered from it.
