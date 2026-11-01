@@ -31,4 +31,4 @@ run-image: image ## Run the image at localhost:$(PORT), e.g. make run-image PORT
 diagrams: $(DIAGRAMS) ## Render each content/**/*.d2 to an .svg beside it
 
 %.svg: %.d2 diagram.d2
-	cat diagram.d2 $< | d2 --omit-version - $@
+	cat diagram.d2 $< | d2 --omit-version --scale 1 - $@

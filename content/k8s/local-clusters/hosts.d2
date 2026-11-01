@@ -1,0 +1,25 @@
+**.style.font-size: 16
+
+grid-columns: 2
+grid-gap: 24
+
+linux: Linux {
+  grid-rows: 3
+  grid-gap: 12
+  # Empty top row so both kernels line up at the bottom.
+  spacer: "" {style.opacity: 0}
+  c: Containers
+  k: Linux kernel
+}
+
+other: macOS or Windows {
+  grid-rows: 2
+  grid-gap: 12
+  vm: Linux VM {
+    grid-rows: 2
+    grid-gap: 12
+    c: Containers
+    k: Linux kernel
+  }
+  k: Host kernel
+}

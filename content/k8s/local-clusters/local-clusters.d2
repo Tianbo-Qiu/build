@@ -1,0 +1,43 @@
+mac: Your Mac {
+  grid-rows: 2
+  grid-gap: 40
+
+  kubectl: kubectl
+
+  vm: Linux VM (Docker Desktop) {
+    grid-rows: 2
+    grid-gap: 48
+
+    cp: kind-control-plane container {
+      grid-columns: 2
+      grid-gap: 24
+      api: API server
+      others: "etcd, scheduler,\ncontroller manager"
+    }
+
+    workers: "" {
+      style.stroke-width: 0
+      style.fill: transparent
+      grid-columns: 2
+      grid-gap: 24
+
+      w1: kind-worker container {
+        kubelet: kubelet
+        runtime: Container runtime
+        pod: nginx pod
+        kubelet -> runtime -> pod
+      }
+
+      w2: kind-worker2 container {
+        kubelet: kubelet
+        runtime: Container runtime
+        pod: nginx pod
+        kubelet -> runtime -> pod
+      }
+    }
+  }
+
+  kubectl -> vm.cp.api
+  vm.workers.w1.kubelet -> vm.cp.api
+  vm.workers.w2.kubelet -> vm.cp.api
+}

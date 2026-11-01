@@ -40,3 +40,19 @@ def = 'A Kubernetes object that keeps a chosen number of identical pods running 
 [replicaset]
 name = 'ReplicaSet'
 def = 'A Kubernetes object that keeps a chosen number of identical pods running. Deployments create and manage ReplicaSets.'
+
+[kubeadm]
+name = 'kubeadm'
+def = 'A Kubernetes tool that sets up a cluster: it starts the control plane on one machine and joins other machines to it as nodes.'
+
+[static-pod]
+name = 'static pod'
+def = 'A pod that the kubelet starts from a manifest file on its node, without the API server. kubeadm runs the control plane this way.'
+
+[kubeconfig]
+name = 'kubeconfig'
+def = 'A file that tells kubectl which clusters exist, how to reach and trust their API servers, and which credentials to use.'
+
+[k8s-namespace]
+name = 'namespace (Kubernetes)'
+def = 'A named group of objects inside a Kubernetes cluster, used to keep teams or apps apart. Unrelated to Linux namespaces.'
