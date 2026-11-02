@@ -1,0 +1,12 @@
+{{- /* Home page robot: a Blender model drawn with three.js; its head follows the pointer. Assets live in static/robot/. */ -}}
+<figure class="robot" data-robot3d data-model="{{ "robot/robot.glb" | relURL }}" data-draco="{{ "robot/draco/" | relURL }}" role="img" aria-label="A robot with an old CRT monitor for a head, wearing a grey technical jacket, turns to look at your pointer.">
+  <img src="{{ "robot/still.webp" | relURL }}" alt="" width="1000" height="1000">
+  <canvas></canvas>
+</figure>
+<script type="importmap">
+{ "imports": {
+  "three": "{{ "robot/vendor/three/build/three.module.min.js" | relURL }}",
+  "three/addons/": "{{ "robot/vendor/three/examples/jsm/" | relURL }}"
+} }
+</script>
+<script type="module" src="{{ "robot/robot3d.js" | relURL }}"></script>

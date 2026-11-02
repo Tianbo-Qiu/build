@@ -2,6 +2,7 @@
   <article{{ if not .IsHome }} data-pagefind-body{{ end }}>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+    {{- if .IsHome }}{{ partial "robot.html" . }}{{ end }}
     <ul data-pagefind-ignore>
       {{ range .Sections.ByTitle }}
         <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
