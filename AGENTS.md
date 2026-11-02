@@ -71,6 +71,7 @@ The one exception is the home page robot (`layouts/_partials/robot.html`, shown 
 - Keep WCAG AA: text contrast at least 4.5:1, link targets at least 24px tall.
 
 - Links inside notes are underlined, because color alone isn't enough to mark them. Navigation links aren't underlined.
+- An email address is written `{{< email "address" >}}`: the word "email" with a small copy icon. Clicking it copies the address and shows "Copied"; without clipboard access or JavaScript it's a mailto link.
 - Glossary terms have a muted dashed underline. Their definition box is flat, with a border and no shadow, and stays inside the screen. Escape closes it.
 - Code blocks use flat grey backgrounds. Syntax colors come from `static/css/syntax.css`, generated with `hugo gen chromastyles` (`github` for light, `github-dark` for dark, each scoped to its color mode, backgrounds removed).
 
