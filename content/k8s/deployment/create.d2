@@ -1,0 +1,36 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+you: Your computer {
+  label.near: top-left
+  kubectl: kubectl
+}
+
+cp: Control plane {
+  label.near: top-left
+  api: API server {
+    label.near: top-left
+    dep: Deployment web
+    rs: ReplicaSet web-6d4cf56db6
+    pod: "Pod web-6d4cf56db6-x8r2k"
+    dep -> rs: "2. create"
+    rs -> pod: "3. create"
+  }
+}
+
+node: Worker node {
+  label.near: top-left
+  kubelet: kubelet
+  runtime: container runtime
+  c: nginx container
+  kubelet -> runtime: "5. run"
+  runtime -> c: "7. start"
+}
+
+hub: Docker Hub {
+  shape: cylinder
+}
+
+you.kubectl -> cp.api.dep: "1. create"
+cp.api.pod -> node.kubelet: "4. bound to this node" {style.stroke-dash: 4}
+hub -> node.runtime: "6. pull nginx:1.27"

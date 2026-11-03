@@ -1,0 +1,29 @@
+{{- /* A command or name split into parts, each explained below it.
+  One part per line: "text | explanation". A line starting with "+ " is a
+  default you can leave out; it stays hidden until the reader shows defaults.
+  join sets what goes between parts: a space by default, "-" for names. */ -}}
+{{- $join := .Get "join" | default " " }}
+{{- $parts := slice }}
+{{- range split (trim .Inner "\n") "\n" }}
+  {{- $line := trim . " " }}
+  {{- if not $line }}{{ continue }}{{ end }}
+  {{- $implied := hasPrefix $line "+ " }}
+  {{- $line = strings.TrimPrefix "+ " $line }}
+  {{- $pair := split $line " | " }}
+  {{- if lt (len $pair) 2 }}{{ errorf "%s: parts line %q needs \"text | explanation\"" $.Position $line }}{{ end }}
+  {{- $parts = $parts | append (dict "text" (index $pair 0) "def" (delimit (after 1 $pair) " | ") "implied" $implied) }}
+{{- end -}}
+<figure class="parts">
+<pre><code>
+  {{- range $i, $p := $parts }}
+    {{- $sep := cond (gt $i 0) $join "" }}
+    {{- if $p.implied }}<span class="implied">{{ $sep }}<span class="part" data-part="{{ $i }}">{{ $p.text }}</span></span>
+    {{- else }}{{ $sep }}<span class="part" data-part="{{ $i }}">{{ $p.text }}</span>{{ end }}
+  {{- end -}}
+</code></pre>
+<ul>
+  {{- range $i, $p := $parts }}
+  <li data-part="{{ $i }}"{{ if $p.implied }} class="implied-def"{{ end }}><code>{{ $p.text }}</code> {{ if $p.implied }}<span class="default">Default, can be left out.</span> {{ end }}{{ $p.def | markdownify }}</li>
+  {{- end }}
+</ul>
+</figure>

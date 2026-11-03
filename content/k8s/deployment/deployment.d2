@@ -1,0 +1,17 @@
+dep: "Deployment web\nreplicas: 3\nimage: nginx:1.27"
+rs: "ReplicaSet web-6d4cf56db6\nreplicas: 3\nimage: nginx:1.27"
+
+p1: "Pod …-x8r2k" {
+  c: nginx
+}
+p2: "Pod …-b7q4m" {
+  c: nginx
+}
+p3: "Pod …-zt9wl" {
+  c: nginx
+}
+
+dep -> rs
+rs -> p1
+rs -> p2
+rs -> p3

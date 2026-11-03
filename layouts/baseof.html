@@ -17,13 +17,13 @@
     @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("{{ "fonts/jetbrains-mono.woff2" | relURL }}") format("woff2"); }
     :root {
       color-scheme: light dark;
-      --fg: #222; --muted: #666; --bg: #fff; --link: #0645ad; --line: #e5e5e5; --code-bg: #f6f6f6;
+      --fg: #222; --muted: #666; --bg: #fff; --link: #0645ad; --line: #e5e5e5; --code-bg: #f6f6f6; --mark: #dcdcdc;
       --serif: "Libre Baskerville", Georgia, serif;
       --sans: "Libre Franklin", system-ui, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     }
     @media (prefers-color-scheme: dark) {
-      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; }
+      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; --mark: #383838; }
     }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.75 var(--serif); }
     a { color: var(--link); text-decoration: none; }
@@ -71,6 +71,21 @@
     .term.hide .tip { display: none; }
     .copy svg { width: .8em; height: .8em; margin-left: .25em; vertical-align: -.05em; fill: none; stroke: currentColor; stroke-width: 1.5; }
     .copied { margin-left: .35em; color: var(--muted); font: .85rem var(--sans); }
+    .wide { display: block; overflow-x: auto; }
+    .parts { margin: 0 0 1.4em; }
+    .parts pre { margin-bottom: .4rem; white-space: pre-wrap; }
+    .parts .part { border-radius: 2px; white-space: nowrap; }
+    .parts .part.on { background: var(--mark); }
+    .parts .implied { color: var(--muted); }
+    .parts.js .implied { display: none; }
+    .parts.js.full .implied, .parts.js .implied:has(.on) { display: inline; }
+    .parts button { min-height: 24px; margin-bottom: .4rem; padding: .1rem .6rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: .8rem var(--sans); cursor: pointer; }
+    .parts button[aria-pressed="true"] { background: var(--code-bg); }
+    .parts ul { margin: 0; padding: 0; list-style: none; font: .9rem/1.6 var(--sans); }
+    .parts li { padding: .2rem .6rem; border-left: 2px solid var(--line); }
+    .parts li.on { border-left-color: var(--fg); background: var(--code-bg); }
+    .parts li > code:first-child { margin-right: .3rem; }
+    .parts .default { color: var(--muted); }
     .glossary dt { margin-top: 1.4em; font: 600 1rem/1.4 var(--sans); scroll-margin-top: 1rem; }
     .glossary dd { margin: .3em 0 0; }
     .robot { position: relative; width: min(100%, 30rem); aspect-ratio: 1; margin: 0 0 1.5rem; touch-action: pan-y; }
@@ -87,6 +102,7 @@
       nav .home, nav .search { margin: 0; }
       nav .search kbd { display: none; }
       .crumbs { font-size: .95rem; line-height: 2; }
+      .wide img { max-width: none; width: 40rem; }
     }
   </style>
 </head>
@@ -127,6 +143,33 @@
     });
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") document.querySelectorAll(".term").forEach(function (t) { t.classList.add("hide"); });
+    });
+
+    // Command parts: pointing at a part highlights it and its explanation.
+    // Defaults stay hidden in the command until the reader shows them.
+    document.querySelectorAll(".parts").forEach(function (fig) {
+      var items = fig.querySelectorAll("[data-part]");
+      function mark(n) {
+        items.forEach(function (el) { el.classList.toggle("on", el.dataset.part === n); });
+      }
+      items.forEach(function (el) {
+        el.addEventListener("mouseenter", function () { mark(el.dataset.part); });
+        el.addEventListener("click", function () { mark(el.dataset.part); });
+      });
+      fig.addEventListener("mouseleave", function () { mark(null); });
+      if (fig.querySelector(".implied")) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Show defaults";
+        button.setAttribute("aria-pressed", "false");
+        button.addEventListener("click", function () {
+          var full = fig.classList.toggle("full");
+          button.setAttribute("aria-pressed", String(full));
+          button.textContent = full ? "Hide defaults" : "Show defaults";
+        });
+        fig.querySelector("pre").after(button);
+      }
+      fig.classList.add("js");
     });
 
     // Email links copy the address. Without clipboard access they open the mail app.

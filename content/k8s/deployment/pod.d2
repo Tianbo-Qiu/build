@@ -1,0 +1,19 @@
+node: Node {
+  label.near: top-left
+  grid-columns: 2
+  grid-gap: 48
+
+  a: "Pod web-…-x8r2k\nIP 10.244.1.5" {
+    label.near: top-left
+    puller: file puller container
+    files: shared volume {shape: cylinder}
+    nginx: nginx container
+    puller -> files: writes
+    files -> nginx: reads
+  }
+
+  b: "Pod api-…-k2m4p\nIP 10.244.1.6" {
+    label.near: top-left
+    api: api container
+  }
+}

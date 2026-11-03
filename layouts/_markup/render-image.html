@@ -1,0 +1,13 @@
+{{- /* Diagrams wider than 900px, such as sequence diagrams, would shrink to
+  unreadable text on phones, so they scroll sideways there instead. */ -}}
+{{- $src := .Destination }}
+{{- $wide := false }}
+{{- with .Page.Resources.Get .Destination }}
+  {{- $src = .RelPermalink }}
+  {{- if eq .MediaType.SubType "svg" }}
+    {{- with findRESubmatch `viewBox="[-\d.]+ [-\d.]+ ([\d.]+)` .Content 1 }}
+      {{- $wide = gt (float (index (index . 0) 1)) 900 }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- if $wide }}<span class="wide">{{ end }}<img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ if $wide }}</span>{{ end -}}

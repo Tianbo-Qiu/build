@@ -1,0 +1,25 @@
+grid-rows: 3
+grid-gap: 72
+
+rs: "ReplicaSet web-6d4cf56db6\nreplicas: 3\nselector: app=web"
+
+n1: Node 1 {
+  label.near: top-left
+  grid-rows: 2
+  grid-columns: 3
+  grid-gap: 24
+  a: "Pod\n…-x8r2k\napp=web"
+  b: "Pod\n…-b7q4m\napp=web"
+  new: "Pod\n…-q2w7n\napp=web\n(replacement)" {style.stroke-dash: 4}
+  api: "Pod\napi-…-k2m4p\napp=api"
+}
+
+n2: "Node 2 (failed)" {
+  label.near: top-left
+  style.stroke-dash: 4
+  gone: "Pod\n…-zt9wl\napp=web\n(gone)" {style.stroke-dash: 4}
+}
+
+rs -> n1.a: counts
+rs -> n1.b: counts
+rs -> n1.new: creates {style.stroke-dash: 4}

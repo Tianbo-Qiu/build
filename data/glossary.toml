@@ -19,6 +19,7 @@ def = 'A machine, physical or virtual, that runs pods in a Kubernetes cluster.'
 
 [pod]
 name = 'pod'
+note = '/k8s/deployment'
 def = 'The smallest unit Kubernetes runs: one or more containers that run on the same node and share some resources, such as a network namespace.'
 
 [apparmor]
@@ -39,10 +40,12 @@ def = 'A Kubernetes object that gives a set of pods one stable network address a
 
 [deployment]
 name = 'Deployment'
+note = '/k8s/deployment'
 def = 'A Kubernetes object that keeps a chosen number of identical pods running and replaces them gradually when you change them.'
 
 [replicaset]
 name = 'ReplicaSet'
+note = '/k8s/deployment'
 def = 'A Kubernetes object that keeps a chosen number of identical pods running. Deployments create and manage ReplicaSets.'
 
 [kubeadm]
@@ -68,3 +71,40 @@ def = 'A named group of objects inside a Kubernetes cluster, used to keep teams 
 name = 'cloud-controller-manager'
 note = '/k8s/managed-clusters'
 def = 'An optional control plane component that connects a cluster to a cloud provider, for example to create load balancers and to track the virtual machines behind nodes.'
+
+[api-server]
+name = 'API server'
+note = '/k8s/architecture'
+def = 'The control plane component that serves the Kubernetes API. Every other component, and every tool such as kubectl, reads and changes cluster state only through it.'
+
+[etcd]
+name = 'etcd'
+note = '/k8s/architecture'
+def = 'A consistent, highly available key-value store that Kubernetes uses to keep all cluster data. Only the API server talks to it.'
+
+[scheduler]
+name = 'scheduler'
+note = '/k8s/architecture'
+def = 'The control plane component that watches for new pods with no node assigned and picks a node for each one to run on.'
+
+[controller]
+name = 'controller'
+note = '/k8s/architecture'
+def = 'A control loop that watches the cluster through the API server and makes or requests changes to move its current state toward the desired state.'
+
+[controller-manager]
+name = 'controller manager'
+note = '/k8s/architecture'
+def = 'The control plane component that runs the built-in controllers, such as the Deployment and ReplicaSet controllers, in one process.'
+
+[label]
+name = 'label'
+def = 'A key-value pair, such as app=web, attached to a Kubernetes object to identify it. A label selector uses labels to pick out a set of objects, such as the pods a ReplicaSet counts as its own.'
+
+[volume]
+name = 'volume'
+def = 'A directory of data that the containers in a pod can access. Its data survives when a container in the pod restarts.'
+
+[container-image]
+name = 'container image'
+def = 'A package of the files and settings a container starts from, named like nginx:1.27 and stored in a registry such as Docker Hub.'

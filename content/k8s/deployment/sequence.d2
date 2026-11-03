@@ -1,0 +1,24 @@
+shape: sequence_diagram
+
+# Sequence diagrams are wide and scroll on phones, so text can be larger.
+**.style.font-size: 30
+(* -> *)[*].style.font-size: 26
+
+kubectl: kubectl
+api: API server
+ctrl: controller manager
+sched: scheduler
+kubelet: kubelet
+
+# Solid arrows are requests to the API server. Dashed arrows are changes
+# the API server streams to a component that watches for them.
+kubectl -> api: create Deployment
+api -> ctrl: Deployment {style.stroke-dash: 4}
+ctrl -> api: create ReplicaSet
+api -> ctrl: ReplicaSet {style.stroke-dash: 4}
+ctrl -> api: create pods
+api -> sched: pods, no node {style.stroke-dash: 4}
+sched -> api: bind pods
+api -> kubelet: pod on my node {style.stroke-dash: 4}
+kubelet -> kubelet: start containers
+kubelet -> api: pod Running
