@@ -36,6 +36,7 @@ def = 'The command-line tool for working with a Kubernetes cluster. It sends req
 
 [service]
 name = 'Service'
+note = '/k8s/service'
 def = 'A Kubernetes object that gives a set of pods one stable network address and spreads traffic among them.'
 
 [deployment]
@@ -108,3 +109,23 @@ def = 'A directory of data that the containers in a pod can access. Its data sur
 [container-image]
 name = 'container image'
 def = 'A package of the files and settings a container starts from, named like nginx:1.27 and stored in a registry such as Docker Hub.'
+
+[kube-proxy]
+name = 'kube-proxy'
+note = '/k8s/service'
+def = 'A process on each node that watches Services and EndpointSlices and writes kernel rules, such as iptables rules, that send traffic for a Service to one of its pods.'
+
+[cluster-dns]
+name = 'cluster DNS'
+note = '/k8s/service'
+def = 'The DNS server inside a Kubernetes cluster, usually CoreDNS. It answers lookups of Service names, such as web.default.svc.cluster.local, and pods use it by default.'
+
+[endpointslice]
+name = 'EndpointSlice'
+note = '/k8s/service'
+def = 'A Kubernetes object that lists the IP addresses and ports of the pods behind a Service, each marked ready or not. A controller keeps it in step with the Service selector.'
+
+[readiness-probe]
+name = 'readiness probe'
+note = '/k8s/service'
+def = 'A check the kubelet runs on a container, such as an HTTP request, to decide whether its pod is ready to receive traffic from Services.'

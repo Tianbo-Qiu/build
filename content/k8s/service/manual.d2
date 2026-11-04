@@ -1,0 +1,14 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+cluster: Cluster {
+  label.near: top-left
+  client: client pod
+  svc: "Service db, no selector\n10.96.0.30:5432"
+  eps: "EndpointSlice, written by hand\n192.0.2.10:5432"
+  client -> svc: "connects to db"
+  svc -> eps: endpoints {style.stroke-dash: 4}
+}
+db: "Database outside the cluster\n192.0.2.10" {shape: cylinder}
+
+cluster.eps -> db: "connection forwarded"

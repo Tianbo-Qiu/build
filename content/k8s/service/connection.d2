@@ -1,0 +1,16 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(* -> *)[*].style.font-size: 26
+
+client: "client pod"
+dns: "cluster DNS"
+kernel: "client's node\n(kernel rules)"
+pod: "pod web-…-x8r2k\n10.244.1.5"
+
+client -> dns: "web?"
+dns -> client: "10.96.0.20"
+client -> kernel: "connect to 10.96.0.20:80"
+kernel -> kernel: "pick a ready pod,\nrewrite destination"
+kernel -> pod: "to 10.244.1.5:80"
+pod -> kernel: "reply"
+kernel -> client: "reply from 10.96.0.20:80"

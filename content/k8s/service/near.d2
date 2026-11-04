@@ -1,0 +1,18 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+client: "client pod on node 1, zone A"
+
+b: Zone B {
+  label.near: top-left
+  p3: "web pod\nnode 3"
+}
+a: Zone A {
+  label.near: top-left
+  p2: "web pod\nnode 2"
+  p1: "web pod\nnode 1"
+}
+
+client -> a.p1: "same node"
+client -> a.p2: "same zone"
+client -> b.p3: "other zone, only if\nno closer pod is ready" {style.stroke-dash: 4}

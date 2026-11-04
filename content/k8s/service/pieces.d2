@@ -1,0 +1,16 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+pods: "Pods labeled app=web\n10.244.1.5  10.244.2.7"
+svc: "Service web\nselector app=web\n10.96.0.20:80 → port 80"
+eps: "EndpointSlice\n10.244.1.5:80  10.244.2.7:80"
+dns: "Cluster DNS\nweb → 10.96.0.20"
+kp: "kube-proxy\non every node"
+rules: "Kernel rules\n10.96.0.20:80 → a ready pod"
+
+svc -> eps: "EndpointSlice\ncontroller"
+pods -> eps
+svc -> dns {style.stroke-dash: 4}
+svc -> kp {style.stroke-dash: 4}
+eps -> kp {style.stroke-dash: 4}
+kp -> rules: writes

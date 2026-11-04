@@ -1,0 +1,14 @@
+grid-rows: 2
+grid-columns: 2
+horizontal-gap: 160
+vertical-gap: 110
+(** -> **)[*].style.font-size: 20
+
+probe: "Readiness probe\nof …-x8r2k fails"
+pod: "Pod …-x8r2k\nnot Ready"
+eps: "EndpointSlice\n10.244.1.5 not ready"
+kp: "kube-proxy on every node\nsends new connections\nonly to ready pods"
+
+probe -> pod: kubelet
+pod -> eps: "EndpointSlice controller"
+eps -> kp: watch {style.stroke-dash: 4}

@@ -1,0 +1,15 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+client: client pod
+svc: "Service web\n10.96.0.20:80"
+pods: "app=web" {
+  label.near: top-left
+  p1: "pod, ready"
+  p2: "pod, ready"
+  p3: "pod, not ready" {style.stroke-dash: 4}
+}
+
+client -> svc: "web"
+svc -> pods.p1
+svc -> pods.p2

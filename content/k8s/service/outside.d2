@@ -1,0 +1,31 @@
+direction: down
+(** -> **)[*].style.font-size: 20
+
+user: Client outside
+lb: "Cloud load balancer\n203.0.113.9:80"
+
+cluster: Cluster {
+  label.near: top-left
+  n3: "Node 3" {
+    label.near: top-left
+    port: ":30080"
+  }
+  n2: "Node 2" {
+    label.near: top-left
+    port: ":30080"
+    pod: "pod 10.244.2.7"
+    port -> pod
+  }
+  n1: "Node 1" {
+    label.near: top-left
+    port: ":30080"
+    pod: "pod 10.244.1.5"
+    port -> pod
+  }
+  n3.port -> n2.pod: "extra hop" {style.stroke-dash: 4}
+}
+
+user -> lb
+lb -> cluster.n3.port
+lb -> cluster.n2.port
+lb -> cluster.n1.port
