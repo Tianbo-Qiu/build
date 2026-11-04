@@ -6,26 +6,29 @@ lb: "Cloud load balancer\n203.0.113.9:80"
 
 cluster: Cluster {
   label.near: top-left
-  n3: "Node 3" {
+  n1: "Node 3" {
     label.near: top-left
     port: ":30080"
+    p1: "pod\n10.244.3.5"
   }
   n2: "Node 2" {
     label.near: top-left
     port: ":30080"
-    pod: "pod 10.244.2.7"
-    port -> pod
+    p2: "pod\n10.244.2.7"
+    p3: "pod\n10.244.2.8"
   }
-  n1: "Node 1" {
+  n3: "Node 1" {
     label.near: top-left
     port: ":30080"
-    pod: "pod 10.244.1.5"
-    port -> pod
+    none: "no\nweb pod" {style.stroke-dash: 4}
   }
-  n3.port -> n2.pod: "extra hop" {style.stroke-dash: 4}
+  n1.port -> n1.p1
+  n2.port -> n2.p3
+  n2.port -> n1.p1 {style.stroke-dash: 4}
+  n3.port -> n2.p2 {style.stroke-dash: 4}
 }
 
 user -> lb
-lb -> cluster.n3.port
-lb -> cluster.n2.port
 lb -> cluster.n1.port
+lb -> cluster.n2.port
+lb -> cluster.n3.port

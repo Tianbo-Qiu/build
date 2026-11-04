@@ -99,6 +99,6 @@ Each layer owns the one inside it, and one component acts on each:
 
 ![Nested boxes. A Deployment, changed by you, holds a ReplicaSet, scaled by the Deployment controller. The ReplicaSet holds a pod, replaced by the ReplicaSet controller. The pod holds a container, restarted by the kubelet.](layers.svg)
 
-One thing none of these layers gives is a stable address. Every replacement pod gets a new IP address, so clients can't rely on any one pod's address. A {{< term service >}} fills that gap: it gives a set of pods one address that stays the same while the pods behind it change.
+One thing none of these layers gives is a stable address. Every replacement pod gets a new IP address, so clients can't rely on any one pod's address. A [Service]({{< ref "/k8s/service" >}}) fills that gap: it gives a set of pods one address that stays the same while the pods behind it change.
 
 References: [Pods](https://kubernetes.io/docs/concepts/workloads/pods/), [Pod lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/), [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [kubectl create deployment](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_create/kubectl_create_deployment/), [kube-scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/), [Images](https://kubernetes.io/docs/concepts/containers/images/)

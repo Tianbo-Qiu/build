@@ -1,0 +1,35 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(** -> **)[*].style.font-size: 26
+
+client: "client\n198.51.100.7"
+lb: "cloud load\nbalancer"
+n1: "node 1\n(no web pod)"
+n2: "node 2"
+pod: "web pod\non node 2"
+
+cluster1: "Cluster policy, load balancer picks node 2" {
+  client -> lb: "connect"
+  lb -> n2: "to :30080"
+  n2 -> pod: "rules pick any pod, here the local one;\nsource becomes node 2"
+  pod -> n2: "reply to node 2"
+  n2 -> client: "reply"
+}
+
+cluster2: "Cluster policy, load balancer picks node 1" {
+  client -> lb: "connect"
+  lb -> n1: "to :30080"
+  n1 -> pod: "rules pick a pod on node 2;\nsource becomes node 1"
+  pod -> n1: "reply to node 1"
+  n1 -> client: "reply"
+}
+
+local: "Local policy" {
+  lb -> n1: "health check"
+  n1 -> lb: "fails: no local pod" {style.stroke-dash: 4}
+  client -> lb: "connect"
+  lb -> n2: "to :30080, only to node 2"
+  n2 -> pod: "rules pick only local pods;\nsource stays 198.51.100.7"
+  pod -> n2: "reply"
+  n2 -> client: "reply"
+}
