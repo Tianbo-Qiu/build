@@ -1,0 +1,17 @@
+direction: down
+
+kubelet: "kubelet"
+sched: scheduler
+evs: "Event objects, deleted after 1 hour by default" {
+  e3: "Warning BackOff"
+  e2: "Normal Pulled"
+  e1: "Normal Scheduled"
+}
+pod: "Pod web-6d4cf56db6-x8r2k"
+
+sched -> evs.e1: creates
+kubelet -> evs.e2: creates
+kubelet -> evs.e3
+evs.e1 -> pod: involvedObject
+evs.e2 -> pod
+evs.e3 -> pod

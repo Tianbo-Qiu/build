@@ -1,0 +1,18 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(* -> *)[*].style.font-size: 26
+
+client: client
+api: "API server"
+ctl: "Deployment\ncontroller"
+
+ctl -> api: "list deployments"
+api -> ctl: "web at resourceVersion 4810"
+ctl -> api: "watch from 4810"
+client -> api: "update spec, replicas: 3\n(resourceVersion 4810)"
+api -> api: "store: resourceVersion 4822,\ngeneration 2"
+api -> ctl: "MODIFIED web (4822)" {style.stroke-dash: 4}
+ctl -> api: "update …/web/status,\nobservedGeneration: 2"
+api -> api: "store: resourceVersion 4830"
+client -> api: "update from its old copy\n(resourceVersion 4822)"
+api -> client: "409 Conflict"

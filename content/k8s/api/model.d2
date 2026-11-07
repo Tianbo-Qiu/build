@@ -1,0 +1,14 @@
+direction: down
+
+kubectl: "kubectl\n(you)"
+cm: "controller\nmanager"
+sched: scheduler
+kubelet: "kubelet\n(each node)"
+api: "API server\nobjects over HTTP"
+etcd: etcd {shape: cylinder}
+
+kubectl -> api
+cm -> api
+sched -> api
+kubelet -> api
+api -> etcd

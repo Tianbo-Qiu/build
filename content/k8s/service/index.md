@@ -17,6 +17,14 @@ A Service has three parts:
 
 A Service selects pods by label, the same way a ReplicaSet does. A pod belongs to the Service when its labels include every label in the selector; its other labels don't matter. Only pods in the Service's namespace can match. A pod that matches but isn't ready stays out of the set until it is.
 
+## The objects of one application
+
+An application on Kubernetes is a few objects in the API. A Deployment owns a ReplicaSet, and the ReplicaSet owns the pods. Each pod has its own IP address and, here, runs one container. A Service gives the pods one cluster IP address. The Deployment and the Service don't refer to each other. The only link between them is the label `app=web`, which the Deployment puts on every pod it creates and the Service selects. The ReplicaSet also adds a `pod-template-hash` label to its pods, but the Service's selector leaves it out, so during a rolling update the Service sends connections to old and new pods alike.
+
+![The objects of one application. The Deployment web, with 3 replicas, owns the ReplicaSet web-6d4cf56db6, which owns three pods: …-x8r2k at 10.244.1.5, …-b7q4m at 10.244.2.7, and …-q2w7n at 10.244.3.5. Each pod is labeled app=web and runs one nginx container. The Service web, with the selector app=web and the cluster IP 10.96.0.20, selects the same three pods, shown with dashed arrows. Solid arrows mean owns; dashed arrows mean selects.](objects.svg)
+
+Solid arrows show ownership, which the pods record in their metadata. Dashed arrows show selection, which the EndpointSlice controller recomputes from labels as pods come and go.
+
 ## Ports
 
 Each port of a Service has a number clients connect to, `port`, and the number on the pods it forwards to, `targetPort`, which defaults to the same value. The target port can also name a port from the pod template, so pods with different port numbers can sit behind one Service port. A Service with more than one port must name each one. The protocol is TCP by default; UDP and SCTP also work.

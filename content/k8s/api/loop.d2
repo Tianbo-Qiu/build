@@ -1,0 +1,17 @@
+direction: right
+
+you: you
+obj: "Deployment web" {
+  label.near: bottom-center
+  spec: "spec\nreplicas: 3"
+  status: "status\nreadyReplicas: 3"
+}
+ctl: "Deployment\ncontroller"
+rs: "ReplicaSet\nweb-6d4cf56db6"
+ev: "Event\nScalingReplicaSet"
+
+you -> obj.spec: write
+obj.spec -> ctl: watch
+ctl -> rs: "create, scale"
+ctl -> obj.status: write
+ctl -> ev: record

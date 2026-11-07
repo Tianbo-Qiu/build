@@ -1,0 +1,12 @@
+grid-rows: 4
+grid-columns: 2
+grid-gap: 16
+
+t: "apiVersion: apps/v1\nkind: Deployment"
+td: "type metadata:\nwhich schema to read the rest with" {shape: text}
+m: "metadata:\n  name: web\n  uid, labels, …"
+md: "object metadata:\nthe same fields in every kind" {shape: text}
+s: "spec:\n  replicas: 3\n  …"
+sd: "spec: the desired state,\nwritten by you" {shape: text}
+st: "status:\n  readyReplicas: 3\n  …"
+std: "status: the actual state,\nwritten by a controller" {shape: text}

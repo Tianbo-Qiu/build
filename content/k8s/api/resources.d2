@@ -1,0 +1,19 @@
+direction: right
+
+urls: "resources (URLs)" {
+  list: "…/namespaces/default/deployments"
+  one: "…/namespaces/default/deployments/web"
+  status: "…/deployments/web/status"
+  sar: "/apis/authorization.k8s.io/v1/\nsubjectaccessreviews"
+}
+objs: "objects (stored)" {
+  web: "Deployment web"
+  api: "Deployment api"
+  none: "no object" {style.stroke-dash: 4}
+}
+
+urls.list -> objs.web
+urls.list -> objs.api
+urls.one -> objs.web
+urls.status -> objs.web: "status only"
+urls.sar -> objs.none

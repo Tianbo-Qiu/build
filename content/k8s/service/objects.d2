@@ -1,0 +1,17 @@
+direction: down
+
+dep: "Deployment web\nreplicas: 3"
+rs: "ReplicaSet web-6d4cf56db6\nreplicas: 3"
+svc: "Service web\nselector: app=web\ncluster IP 10.96.0.20"
+
+p3: "pod …-x8r2k\napp=web\n10.244.1.5\ncontainer nginx"
+p2: "pod …-b7q4m\napp=web\n10.244.2.7\ncontainer nginx"
+p1: "pod …-q2w7n\napp=web\n10.244.3.5\ncontainer nginx"
+
+dep -> rs
+rs -> p1
+rs -> p2
+rs -> p3
+svc -> p1 {style.stroke-dash: 4}
+svc -> p2 {style.stroke-dash: 4}
+svc -> p3 {style.stroke-dash: 4}
