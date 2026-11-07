@@ -1,0 +1,14 @@
+direction: right
+
+you: "you"
+app: "chat app\nChatGPT, Claude, Gemini"
+code: "your program"
+api: "maker's API"
+cloud: "model on the\nmaker's servers"
+local: "Ollama or llama.cpp\non your machine"
+weights: "open-weight file\nfrom Hugging Face" {shape: cylinder}
+
+you -> app -> api -> cloud
+code -> api: "pay per token"
+code -> local
+local -> weights: loads

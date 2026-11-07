@@ -129,3 +129,23 @@ def = 'A Kubernetes object that lists the IP addresses and ports of the pods beh
 name = 'readiness probe'
 note = '/k8s/service'
 def = 'A check the kubelet runs on a container, such as an HTTP request, to decide whether its pod is ready to receive traffic from Services.'
+
+[llm]
+name = 'large language model (LLM)'
+note = '/ai/llm'
+def = 'A neural network trained on a very large amount of text to predict the next token from the tokens before it. It writes by repeating that prediction one token at a time.'
+
+[token]
+name = 'token'
+note = '/ai/llm'
+def = 'The unit of text a language model reads and writes, often a word or part of a word. Context limits and API prices are counted in tokens.'
+
+[context-window]
+name = 'context window'
+note = '/ai/llm'
+def = 'The most tokens a language model can take in at once, prompt and reply together.'
+
+[hallucination]
+name = 'hallucination'
+note = '/ai/llm'
+def = 'A fluent statement from a language model that is false. Models produce likely text and do not look facts up.'

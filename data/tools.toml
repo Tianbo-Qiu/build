@@ -39,6 +39,21 @@ site = 'https://kind.sigs.k8s.io'
 source = 'https://github.com/kubernetes-sigs/kind'
 note = '/k8s/local-clusters'
 
+[llamacpp]
+name = 'llama.cpp'
+category = 'AI'
+desc = 'A C/C++ engine for running language models locally, with quantized weights from 1.5 to 8 bits stored in the GGUF format.'
+source = 'https://github.com/ggml-org/llama.cpp'
+note = '/ai/llm'
+
+[ollama]
+name = 'Ollama'
+category = 'AI'
+desc = 'A tool for running open-weight language models locally, with one command per model and an HTTP API for programs.'
+site = 'https://ollama.com'
+source = 'https://github.com/ollama/ollama'
+note = '/ai/llm'
+
 [pagefind]
 name = 'Pagefind'
 category = 'Search'

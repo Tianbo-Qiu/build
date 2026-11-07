@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-label="Published parameter counts, 2018 to 2026">
+<style>
+.ink{fill:#222} .muted{fill:#666} .grid{stroke:#e5e5e5} .axis{stroke:#999}
+.dot{fill:#222} .ring{fill:#fff;stroke:#222;stroke-width:3} .link{stroke:#999;stroke-width:3}
+.step{stroke:#222;stroke-width:3;fill:none}
+text{font-family:"Libre Franklin",-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:24px}
+@media (prefers-color-scheme: dark){.ink{fill:#ddd}.muted{fill:#aaa}.grid{stroke:#333}.axis{stroke:#666}.dot{fill:#ddd}.ring{fill:#111;stroke:#ddd}.link{stroke:#777}.step{stroke:#ddd}}
+</style>
+<line class="grid" x1="100" x2="860" y1="468.0" y2="468.0"/>
+<text class="muted" x="88" y="476.0" text-anchor="end">100M</text>
+<line class="grid" x1="100" x2="860" y1="377.3" y2="377.3"/>
+<text class="muted" x="88" y="385.3" text-anchor="end">1B</text>
+<line class="grid" x1="100" x2="860" y1="286.7" y2="286.7"/>
+<text class="muted" x="88" y="294.7" text-anchor="end">10B</text>
+<line class="grid" x1="100" x2="860" y1="196.0" y2="196.0"/>
+<text class="muted" x="88" y="204.0" text-anchor="end">100B</text>
+<line class="grid" x1="100" x2="860" y1="105.4" y2="105.4"/>
+<text class="muted" x="88" y="113.4" text-anchor="end">1T</text>
+<text class="muted" x="100.0" y="500" text-anchor="middle">2018</text>
+<text class="muted" x="268.9" y="500" text-anchor="middle">2020</text>
+<text class="muted" x="437.8" y="500" text-anchor="middle">2022</text>
+<text class="muted" x="606.7" y="500" text-anchor="middle">2024</text>
+<text class="muted" x="775.6" y="500" text-anchor="middle">2026</text>
+<line class="axis" x1="100" x2="860" y1="468" y2="468"/>
+<text class="muted" x="100" y="534">parameters, log scale</text>
+<line class="link" x1="686.9" x2="686.9" y1="121.1" y2="235.2"/>
+<line class="link" x1="737.6" x2="737.6" y1="105.4" y2="240.9"/>
+<line class="link" x1="800.9" x2="800.9" y1="86.9" y2="224.1"/>
+<line class="link" x1="822.0" x2="822.0" y1="64.8" y2="194.5"/>
+<circle class="dot" cx="138.0" cy="461.8" r="7"/>
+<text class="ink" x="138.0" y="444.9" text-anchor="middle">GPT-1</text>
+<circle class="dot" cx="194.6" cy="361.4" r="7"/>
+<text class="ink" x="194.6" y="344.4" text-anchor="middle">GPT-2</text>
+<circle class="dot" cx="302.7" cy="174.0" r="7"/>
+<text class="ink" x="302.7" y="157.1" text-anchor="middle">GPT-3</text>
+<circle class="dot" cx="534.9" cy="213.0" r="7"/>
+<text class="ink" x="534.9" y="196.0" text-anchor="middle">LLaMA</text>
+<circle class="dot" cx="653.1" cy="141.0" r="7"/>
+<text class="ink" x="653.1" y="174.8" text-anchor="middle">Llama 3.1</text>
+<circle class="dot" cx="686.9" cy="121.1" r="7"/>
+<text class="ink" x="675.6" y="107.0" text-anchor="end">DeepSeek-V3</text>
+<circle class="ring" cx="686.9" cy="235.2" r="7"/>
+<circle class="dot" cx="737.6" cy="105.4" r="7"/>
+<text class="ink" x="737.6" y="88.4" text-anchor="middle">Kimi K2</text>
+<circle class="ring" cx="737.6" cy="240.9" r="7"/>
+<circle class="dot" cx="800.9" cy="86.9" r="7"/>
+<text class="ink" x="772.7" y="38.9" text-anchor="middle">DeepSeek-V4-Pro</text>
+<circle class="ring" cx="800.9" cy="224.1" r="7"/>
+<circle class="dot" cx="822.0" cy="64.8" r="7"/>
+<text class="ink" x="833.3" y="71.9" text-anchor="start">Kimi K3</text>
+<circle class="ring" cx="822.0" cy="194.5" r="7"/>
+<circle class="dot" cx="353.3" cy="300" r="7"/><text class="ink" x="371.3" y="308">total parameters</text>
+<circle class="ring" cx="353.3" cy="336" r="7"/><text class="ink" x="371.3" y="344">used per token (mixture of experts)</text>
+</svg>

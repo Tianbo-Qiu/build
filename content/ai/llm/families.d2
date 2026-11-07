@@ -1,0 +1,34 @@
+grid-columns: 1
+grid-gap: 24
+
+us: "United States" {
+  grid-rows: 2
+  grid-columns: 4
+  gpt: GPT
+  claude: Claude
+  gemini: Gemini
+  grok: Grok
+  llama: Llama {style.stroke-dash: 4}
+  gemma: Gemma {style.stroke-dash: 4}
+  oss: "gpt-oss" {style.stroke-dash: 4}
+}
+cn: "China" {
+  grid-rows: 2
+  grid-columns: 3
+  qwen: Qwen {style.stroke-dash: 4}
+  ds: DeepSeek {style.stroke-dash: 4}
+  kimi: Kimi {style.stroke-dash: 4}
+  glm: GLM {style.stroke-dash: 4}
+  mm: MiniMax {style.stroke-dash: 4}
+  ernie: ERNIE {style.stroke-dash: 4}
+}
+eu: "France" {
+  mistral: Mistral {style.stroke-dash: 4}
+}
+us.*.width: 130
+us.*.height: 56
+cn.*.width: 130
+cn.*.height: 56
+eu.*.width: 130
+eu.*.height: 56
+key: "solid: main models closed · dashed: main models with open weights" {shape: text}

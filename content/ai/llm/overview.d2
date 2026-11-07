@@ -1,0 +1,9 @@
+direction: down
+
+tok: "tokenizer\n\"The capital of France is\" → 464 3139 286 4881 318"
+model: "model, GPT-2 small\nembeddings → 12 transformer layers → output head"
+probs: "a probability for each of 50,257 tokens\n\" the\" 8.5%, \" now\" 4.8%, \" a\" 4.6%, …"
+pick: "pick one token, \" the\""
+
+tok -> model -> probs -> pick
+pick -> model: "append it, run again" {style.stroke-dash: 4}
