@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <article data-pagefind-body>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{- $tools := slice }}
+    {{- range $id, $t := site.Data.tools }}
+      {{- $tools = $tools | append (dict "id" $id "key" (lower $t.name) "cat" $t.category "t" $t) }}
+    {{- end }}
+    {{- range (sort (uniq (apply $tools "index" "." "cat")) "value") }}
+      {{- $cat := . }}
+      <h2>{{ $cat }}</h2>
+      <dl class="tools">
+        {{- range sort (where $tools "cat" $cat) "key" }}
+          <dt id="{{ .id }}">
+            {{- $icon := printf "tools/%s.png" .id }}
+            {{- if fileExists (printf "static/%s" $icon) }}<img class="tool-icon" src="{{ $icon | relURL }}" alt="" width="20" height="20">{{ end }}
+            {{- .t.name }}</dt>
+          <dd>
+            {{ .t.desc }}
+            {{- $links := slice }}
+            {{- with .t.site }}{{ $links = $links | append (printf "<a href=%q>Site</a>" .) }}{{ end }}
+            {{- with .t.docs }}{{ $links = $links | append (printf "<a href=%q>Docs</a>" .) }}{{ end }}
+            {{- with .t.source }}{{ $links = $links | append (printf "<a href=%q>Source</a>" .) }}{{ end }}
+            {{- with .t.note }}{{ with site.GetPage . }}{{ $links = $links | append (printf "Used in <a href=%q>%s</a>" .RelPermalink .LinkTitle) }}{{ else }}{{ errorf "data/tools.toml: no page %q" . }}{{ end }}{{ end }}
+            <span class="tool-links">{{ delimit $links " · " | safeHTML }}</span>
+          </dd>
+        {{- end }}
+      </dl>
+    {{- end }}
+  </article>
+{{ end }}

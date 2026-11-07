@@ -1,0 +1,54 @@
+# Tools listed on /tools/. Each entry: name, category (the page's
+# headings), desc (one sentence, starting with what kind of thing it
+# is), and links: site, source, docs (any that exist). note links to a
+# note on this site that uses the tool.
+
+[blender]
+name = 'Blender'
+category = '3D graphics'
+desc = 'A free and open-source 3D creation suite for modeling, animation, simulation, and rendering, scriptable in Python.'
+site = 'https://www.blender.org'
+source = 'https://projects.blender.org/blender/blender'
+
+[d2]
+name = 'D2'
+category = 'Diagramming'
+desc = 'A diagram scripting language that turns text into diagrams, rendered to SVG by its command-line tool.'
+site = 'https://d2lang.com'
+source = 'https://github.com/d2lang/d2'
+
+[headlamp]
+name = 'Headlamp'
+category = 'Kubernetes'
+desc = 'A web UI for Kubernetes clusters, extensible with plugins, that runs in the cluster or locally as a desktop app.'
+site = 'https://headlamp.dev'
+source = 'https://github.com/kubernetes-sigs/headlamp'
+
+[hugo]
+name = 'Hugo'
+category = 'Static site generators'
+desc = 'A static site generator, written in Go, that builds a website from Markdown content and templates.'
+site = 'https://gohugo.io'
+source = 'https://github.com/gohugoio/hugo'
+
+[kind]
+name = 'kind'
+category = 'Kubernetes'
+desc = 'A tool for running local Kubernetes clusters whose nodes are Docker containers, built for testing Kubernetes itself and also used for development and CI.'
+site = 'https://kind.sigs.k8s.io'
+source = 'https://github.com/kubernetes-sigs/kind'
+note = '/k8s/local-clusters'
+
+[pagefind]
+name = 'Pagefind'
+category = 'Search'
+desc = 'A static search library that indexes a built website and runs searches in the browser, with no search server.'
+site = 'https://pagefind.app'
+source = 'https://github.com/Pagefind/pagefind'
+
+[threejs]
+name = 'three.js'
+category = '3D graphics'
+desc = 'A JavaScript 3D library that draws scenes in the browser with WebGL or WebGPU.'
+site = 'https://threejs.org'
+source = 'https://github.com/mrdoob/three.js'
