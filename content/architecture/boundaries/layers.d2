@@ -1,0 +1,25 @@
+direction: down
+
+ui: "frontend team: web UI, presentation" {
+  grid-columns: 3
+  o: "orders UI\n+ gift wrap"
+  p: "payments UI"
+  s: "shipping UI"
+}
+api: "backend team: business logic" {
+  grid-columns: 3
+  o: "orders logic\n+ gift wrap"
+  p: "payments logic"
+  s: "shipping logic"
+}
+db: "DBAs: database, data" {
+  grid-columns: 3
+  o: "orders table\n+ gift wrap"
+  p: "payments tables"
+  s: "shipping tables"
+}
+ui -> api -> db
+
+*.*.width: 160
+*.*.height: 70
+

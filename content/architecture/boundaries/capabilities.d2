@@ -1,0 +1,24 @@
+grid-columns: 3
+grid-gap: 32
+
+o: "orders team" {
+  direction: down
+  ui: "orders UI\n+ gift wrap option"
+  logic: "orders logic\n+ gift wrap price"
+  data: "orders data\n+ gift wrap" {shape: cylinder}
+  ui -> logic -> data
+}
+p: "payments team" {
+  direction: down
+  ui: "payments UI"
+  logic: "payments logic"
+  data: "payments data" {shape: cylinder}
+  ui -> logic -> data
+}
+s: "shipping team" {
+  direction: down
+  ui: "shipping UI"
+  logic: "shipping logic"
+  data: "shipping data" {shape: cylinder}
+  ui -> logic -> data
+}

@@ -39,8 +39,8 @@ A network call can time out, arrive twice, or reach a service that has just rest
 Structure:
 
 - Service: a separately deployed program that does one job for the rest of the system, behind an API.
-- Business capability: something the business does, such as taking orders or billing. Services are split along these, not along technical layers.
-- Bounded context: the part of a system within which a model and its words have one meaning. A service's boundary often matches one.
+- Business capability: something the business does, such as taking orders or billing. Services are split along these, not along technical layers. See [Service boundaries]({{< ref "/architecture/boundaries" >}}).
+- Bounded context: the part of a system within which a model and its words have one meaning, an idea from domain-driven design. A service's boundary often matches one. See [Service boundaries]({{< ref "/architecture/boundaries" >}}).
 - Modular monolith: a monolith split internally into modules with strict boundaries, deployed as one unit.
 - Hexagonal architecture: a way to structure the inside of one service so its business logic doesn't depend on its database or framework. See [SOA and hexagonal architecture]({{< ref "/architecture/styles" >}}).
 
