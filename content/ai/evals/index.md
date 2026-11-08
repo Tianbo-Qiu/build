@@ -47,13 +47,15 @@ Once the test set exists, every new prompt, for the first draft or for the refle
 
 A subjective eval has no single right answer, such as whether a chart is clear. People can grade it, but slowly. The other way is an LLM as a judge: a second model, prompted to grade the output.
 
-Asking a judge which of two outputs is better is unreliable. Zheng et al. (2023) measured three biases in LLM judges:
+Asking a judge which of two outputs is better, a pairwise comparison, is unreliable. Zheng et al. (2023) measured three biases in LLM judges:
 
 - Position bias: favoring the answer in one position, such as the first, regardless of its quality.
 - Verbosity bias: favoring the longer answer.
 - Self-enhancement bias: favoring answers the judge model wrote itself.
 
-A common fix is to grade one output at a time against a rubric of specific checks, each passed or failed, and add up the passes:
+## Rubrics
+
+A rubric is a written list of criteria that an output is graded against. It turns "is this chart good?" into specific questions a judge can answer one at a time, so the grade doesn't depend on the judge's overall impression. A common form grades one output at a time, with each criterion passed or failed, and adds up the passes. Grading one output at a time also avoids position bias, because there is no second answer to favor.
 
 ```text
 Grade the attached chart. Answer yes or no for each item.
@@ -64,7 +66,11 @@ Grade the attached chart. Answer yes or no for each item.
 5. No text overlaps.
 ```
 
-The score is the number of yes answers, out of 5. A judge also needs tuning: its grades are checked against a person's grades on a sample before its scores are trusted. Anthropic's docs recommend "detailed, clear rubrics", grades that are specific such as "correct" or "incorrect", and a grader that reasons before it scores. Zheng et al. found that strong judges such as GPT-4 agreed with human preferences more than 80% of the time, about as often as people agree with each other.
+The score for one chart is the number of yes answers, out of 5. Averaged over the test set, it gives one number per version of the application, as the share of right answers does in an objective eval. When a prompt changes, the same rubric grades the new charts.
+
+![A test set of chart requests, with no single right answer, sends one request at a time to the application, version A or B. It produces one chart, which goes to an LLM judge that answers each check. The rubric for this chart reads: has a title, yes; axes labeled, yes; chart type suits data, yes; legend names every series, no; no overlapping text, yes. The score is 4 of 5, averaged over the test set, per version. Separately, a person grades a sample of charts, to check whether the person's grades and the judge's agree.](rubric.svg)
+
+A judge also needs tuning: its grades are checked against a person's grades on a sample before its scores are trusted. Anthropic's docs recommend "detailed, clear rubrics", grades that are specific such as "correct" or "incorrect", and a grader that reasons before it scores. Zheng et al. found that strong judges such as GPT-4 agreed with human preferences more than 80% of the time, about as often as people agree with each other.
 
 ## Objective compared with subjective
 

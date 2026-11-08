@@ -149,3 +149,8 @@ def = 'The most tokens a language model can take in at once, prompt and reply to
 name = 'hallucination'
 note = '/ai/llm'
 def = 'A fluent statement from a language model that is false. Models produce likely text and do not look facts up.'
+
+[rubric]
+name = 'rubric'
+note = '/ai/evals'
+def = 'A written list of criteria that an output is graded against, such as "the chart has a title". Each criterion is often passed or failed, and the passes are added up.'

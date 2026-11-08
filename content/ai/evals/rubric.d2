@@ -1,0 +1,33 @@
+direction: down
+
+set: "test set:\nchart requests,\nno single right answer"
+app: "application\n(version A or B)"
+chart: "one chart"
+judge: "LLM judge\nanswers each check"
+grade: "rubric for this chart" {
+  grid-rows: 5
+  grid-columns: 2
+  grid-gap: 0
+  c1: "has a title"
+  v1: "yes"
+  c2: "axes labeled"
+  v2: "yes"
+  c3: "chart type suits data"
+  v3: "yes"
+  c4: "legend names every series"
+  v4: "no"
+  c5: "no overlapping text"
+  v5: "yes"
+}
+score: "score: 4 of 5\naveraged over the test set,\nper version"
+person: "a person grades\na sample of charts"
+
+set -> app: "one request"
+app -> chart
+chart -> judge
+judge -> grade
+grade -> score
+person -> judge: "do their grades agree?"
+
+**.style.font-size: 16
+(* -> *)[*].style.font-size: 16
