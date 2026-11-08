@@ -1,0 +1,11 @@
+direction: down
+
+one: "one call\nprompt in, reply out"
+flow: "workflow\nthe developer fixes\nthe steps in code"
+agent: "agent\nthe model chooses\nthe next step"
+
+one -> flow: "add steps,\nchecks, and tools"
+flow -> agent: "let the model\ndecide the steps"
+
+**.style.font-size: 16
+(* -> *)[*].style.font-size: 16

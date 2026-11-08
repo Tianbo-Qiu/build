@@ -58,7 +58,7 @@ Using a model:
 - Reasoning model: a model trained to work through a long chain of thought before it answers.
 - Reasoning tokens: the tokens a reasoning model writes while thinking, before its answer. Spending more of them, called test-time compute, often improves hard answers, and they're usually billed as output tokens.
 - Tool use: the model writes a request for a tool, such as a search or a command, and the application runs it and returns the result.
-- Agent: a model that works in a loop of tool calls toward a goal, such as editing code until the tests pass.
+- Agent: a model that works in a loop of tool calls toward a goal, such as editing code until the tests pass. See [Agentic design patterns]({{< ref "/ai/agentic-patterns" >}}).
 - Open weights: weights published for anyone to download and run, as with Llama, Qwen, and DeepSeek.
 
 ## Ways to use a model

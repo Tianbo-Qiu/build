@@ -1,0 +1,34 @@
+grid-rows: 2
+grid-columns: 2
+grid-gap: 32
+
+zs: "zero-shot: 1 call" {
+  direction: down
+  p: "instruction"
+  m: "LLM"
+  a: "answer"
+  p -> m -> a
+}
+fs: "few-shot: 1 call" {
+  direction: down
+  p: "examples\n+ instruction"
+  m: "LLM"
+  a: "answer"
+  p -> m -> a
+}
+cot: "chain-of-thought: 1 call" {
+  direction: down
+  p: "instruction\n+ think step by step"
+  m: "LLM"
+  a: "reasoning,\nthen answer"
+  p -> m -> a
+}
+ref: "reflection: 3 calls" {
+  direction: down
+  a: "LLM: answer"
+  c: "LLM: critique"
+  r: "LLM: revised answer"
+  a -> c -> r
+}
+
+**.style.font-size: 16

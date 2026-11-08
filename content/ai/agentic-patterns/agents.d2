@@ -1,0 +1,16 @@
+direction: down
+
+task: "task:\nmarketing brochure"
+r: "research agent\nweb search tool"
+m: "marketer agent\nwrites the copy"
+e: "editor agent\npolishes the text"
+out: "brochure"
+
+task -> r
+r -> m: "findings"
+m -> e: "draft"
+e -> m: "changes requested"
+e -> out: "approved"
+
+**.style.font-size: 16
+(* -> *)[*].style.font-size: 16

@@ -1,0 +1,15 @@
+shape: sequence_diagram
+
+user: "user"
+app: "application"
+model: "LLM"
+tool: "code runner"
+
+user -> app: "100 dollars at 5% a year for 10 years?"
+app -> model: "question + tool list: run_python"
+model -> app: "call run_python('print(100 * 1.05 ** 10)')"
+app -> tool: "run the code"
+tool -> app: "162.8894626777442"
+app -> model: "tool result: 162.889..."
+model -> app: "about 162.89 dollars"
+app -> user: "about 162.89 dollars"

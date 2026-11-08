@@ -1,0 +1,14 @@
+direction: down
+
+task: "task:\nwrite a function"
+write: "LLM writes\nor revises the code"
+check: "check the code:\nLLM critique,\nor run the tests"
+done: "final code"
+
+task -> write
+write -> check: "code v1, v2, ..."
+check -> write: "critique or\ntest errors"
+write -> done: "no issues left,\nor round limit"
+
+**.style.font-size: 16
+(* -> *)[*].style.font-size: 16

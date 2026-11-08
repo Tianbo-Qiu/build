@@ -1,0 +1,15 @@
+direction: down
+
+req: "request: an image of a girl reading,\nin the same pose as the boy in boy.jpg,\nthen describe it aloud"
+plan: "LLM plans the steps\nand picks a model for each"
+s1: "1 pose detection\non boy.jpg"
+s2: "2 pose-to-image:\ngirl reading a book"
+s3: "3 image-to-text:\ncaption the new image"
+s4: "4 text-to-speech:\nread the caption"
+out: "LLM sums up the results\nfor the user"
+
+req -> plan -> s1
+s1 -> s2: "pose"
+s2 -> s3: "image"
+s3 -> s4: "caption"
+s4 -> out: "audio"
