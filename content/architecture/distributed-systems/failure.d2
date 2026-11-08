@@ -1,0 +1,11 @@
+shape: sequence_diagram
+
+a: "orders service"
+b: "payments service"
+
+a -> b: "charge 20 dollars"
+b -> b: "charge done"
+b -> a: "reply lost" {style.stroke-dash: 4}
+a -> a: "timeout: did it happen?"
+a -> b: "retry: charge 20 dollars, key 7f3"
+b -> a: "already done for key 7f3"

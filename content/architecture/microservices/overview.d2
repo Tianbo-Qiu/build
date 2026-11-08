@@ -1,0 +1,24 @@
+direction: down
+
+client: "client"
+gw: "API gateway"
+orders: "orders"
+users: "users"
+pay: "payments"
+odb: "DB" {shape: cylinder}
+udb: "DB" {shape: cylinder}
+pdb: "DB" {shape: cylinder}
+bus: "message broker"
+ship: "shipping"
+sdb: "DB" {shape: cylinder}
+
+client -> gw: HTTPS
+gw -> orders
+gw -> users
+orders -> pay: "request"
+orders -> bus: "order placed" {style.stroke-dash: 4}
+bus -> ship {style.stroke-dash: 4}
+orders -> odb
+users -> udb
+pay -> pdb
+ship -> sdb

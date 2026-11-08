@@ -1,0 +1,28 @@
+grid-columns: 2
+grid-gap: 48
+
+mono: "monolith: one process, one deploy" {
+  direction: down
+  app: "application" {
+    direction: down
+    o: "orders module"
+    u: "users module"
+    p: "payments module"
+  }
+  db: "one database" {shape: cylinder}
+  app -> db
+  app.o -> app.p: "function call"
+}
+micro: "microservices: many processes, separate deploys" {
+  direction: down
+  o: "orders service"
+  u: "users service"
+  p: "payments service"
+  odb: "orders DB" {shape: cylinder}
+  udb: "users DB" {shape: cylinder}
+  pdb: "payments DB" {shape: cylinder}
+  o -> odb
+  u -> udb
+  p -> pdb
+  o -> p: "network call"
+}

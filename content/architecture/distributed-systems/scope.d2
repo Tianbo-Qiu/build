@@ -1,0 +1,15 @@
+grid-columns: 1
+grid-gap: 48
+
+inproc: "one process: monolith, hexagonal architecture" {
+  direction: right
+  a: "module"
+  b: "module"
+  a -> b: "function call:\nfast, can't half-fail"
+}
+between: "many processes: SOA, microservices" {
+  direction: right
+  s1: "service A"
+  s2: "service B"
+  s1 -> s2: "network call:\nslow, can fail or time out"
+}

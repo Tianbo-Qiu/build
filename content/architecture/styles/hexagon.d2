@@ -1,0 +1,18 @@
+direction: right
+
+http: "HTTP controller"
+test: "test harness"
+app: "application core\nordering rules\n\nports:\nPlaceOrder\nOrderStore, Payments" {shape: hexagon}
+sql: "SQL adapter" 
+fake: "in-memory fake"
+payapi: "payments API client"
+db: database {shape: cylinder}
+pay: "payments service" 
+
+http -> app: "PlaceOrder"
+test -> app: "PlaceOrder" {style.stroke-dash: 4}
+app -> sql: "OrderStore"
+app -> fake: "OrderStore" {style.stroke-dash: 4}
+app -> payapi: "Payments"
+sql -> db
+payapi -> pay: "network call"

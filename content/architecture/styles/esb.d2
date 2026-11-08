@@ -1,0 +1,27 @@
+grid-columns: 2
+grid-gap: 64
+
+p2p: "point-to-point integration" {
+  a: "CRM"
+  b: "billing"
+  c: "orders"
+  d: "warehouse"
+  a -> b
+  a -> c
+  b -> c
+  c -> d
+  b -> d
+  a -> d
+}
+hub: "SOA with an enterprise service bus" {
+  direction: down
+  a: "CRM service"
+  b: "billing service"
+  esb: "enterprise service bus\nrouting, transformation, rules"
+  c: "orders service"
+  d: "warehouse service"
+  a -> esb
+  b -> esb
+  esb -> c
+  esb -> d
+}
