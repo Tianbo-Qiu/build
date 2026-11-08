@@ -1,0 +1,18 @@
+direction: down
+
+set: "test set:\n3 questions with\nground-truth answers"
+a: "version A:\nquery as first written"
+b: "version B:\nquery after reflection"
+check: "code compares each answer\nwith the ground truth"
+ra: "A: 1 of 3 right"
+rb: "B: 3 of 3 right"
+
+set -> b
+set -> a
+b -> check: "answers"
+a -> check: "answers"
+check -> rb
+check -> ra
+
+**.style.font-size: 16
+(* -> *)[*].style.font-size: 16

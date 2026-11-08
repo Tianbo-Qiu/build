@@ -14,7 +14,7 @@ Four patterns cover most ways the steps are combined:
 - Planning: the model decides which steps to take, and in what order.
 - Multi-agent collaboration: several model calls, each prompted with its own role, work on one task.
 
-The patterns combine. A critic in reflection can be a second agent, and the check can be a tool that runs tests. Each pattern adds calls, so it adds cost and time, and the gain is measured with evaluations on the real task.
+The patterns combine. A critic in reflection can be a second agent, and the check can be a tool that runs tests. Each pattern adds calls, so it adds cost and time, and the gain is measured with [evaluations]({{< ref "/ai/evals" >}}) on the real task.
 
 ## Reflection
 

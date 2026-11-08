@@ -69,6 +69,6 @@ Guides from the makers:
 - [Prompting strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies) (Google).
 - [Prompt engineering interactive tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) (Anthropic): nine chapters of exercises in Jupyter notebooks, which need an API key.
 
-Whether a prompt is better shows only in its outputs: two versions are run on the same set of inputs and compared.
+Whether a prompt is better shows only in its outputs: two versions are run on the same set of inputs and compared, as in an [eval]({{< ref "/ai/evals" >}}).
 
 References: [Language Models are Few-Shot Learners (Brown et al., 2020)](https://arxiv.org/abs/2005.14165), [Chain-of-Thought Prompting (Wei et al., 2022)](https://arxiv.org/abs/2201.11903), [Large Language Models are Zero-Shot Reasoners (Kojima et al., 2022)](https://arxiv.org/abs/2205.11916), [Self-Refine (Madaan et al., 2023)](https://arxiv.org/abs/2303.17651)
