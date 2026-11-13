@@ -1,0 +1,16 @@
+direction: down
+
+host: "host: a chat app or coding agent" {
+  direction: right
+  llm: "connection\nto the LLM"
+  c1: "MCP client 1"
+  c2: "MCP client 2"
+}
+s1: "MCP server:\nfiles and git"
+s2: "MCP server:\nsales database"
+
+host.c1 -> s1: "tools/list\ntools/call"
+host.c2 -> s2: "tools/list\ntools/call"
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16

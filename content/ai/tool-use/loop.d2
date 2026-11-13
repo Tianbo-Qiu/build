@@ -1,0 +1,20 @@
+shape: sequence_diagram
+
+user: "user"
+app: "application"
+model: "LLM"
+fn: "function"
+
+user -> app: "more items in May or June?"
+app -> model: "question + items_sold definition"
+model -> app: "call items_sold(2025-05)\ncall items_sold(2025-06)"
+app -> fn: "items_sold(2025-05)"
+fn -> app: "11"
+app -> fn: "items_sold(2025-06)"
+fn -> app: "10"
+app -> model: "results: 11, 10"
+model -> app: "May, 11 against 10"
+app -> user: "May, 11 against 10"
+
+**.style.font-size: 30
+(* -> *)[*].style.font-size: 30

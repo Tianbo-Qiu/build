@@ -52,7 +52,7 @@ The feedback gets better when it comes from [outside the model]({{< ref "/ai/ext
 
 ## Tool use
 
-A tool is a function that the application offers to the model, described by a name, a purpose, and its parameters. The model doesn't run anything itself. It replies with a tool call, the function's name and arguments, and the application runs the function and sends the result back as more text. The model then continues, either with another call or with the answer. Choosing which tool to call, and when, is the model's part.
+A tool is a function that the application offers to the model, described by a name, a purpose, and its parameters. The model doesn't run anything itself. It replies with a tool call, the function's name and arguments, and the application runs the function and sends the result back as more text. The model then continues, either with another call or with the answer. Choosing which tool to call, and when, is the model's part. [Tool use]({{< ref "/ai/tool-use" >}}) has the full loop, the message format, and MCP.
 
 ![A sequence diagram. The user asks the application what 100 dollars at 5% a year for 10 years becomes. The application sends the question to the LLM with a tool list holding run_python. The LLM replies with a call to run_python with the code print(100 * 1.05 ** 10). The application runs the code in a code runner, which returns 162.8894626777442. The application sends the result to the LLM, which answers about 162.89 dollars, and the application passes that to the user.](tools.svg)
 
