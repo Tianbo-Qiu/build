@@ -1,0 +1,16 @@
+shape: sequence_diagram
+
+k: "kubelet"
+s: "sidecar"
+a: "app"
+
+k -> s: "start (18:03:41.817)"
+s -> k: "started"
+k -> a: "start (18:03:41.873)"
+k -> a: "pod deleted: SIGTERM (18:03:43.953)"
+a -> a: "shuts down for 5 s"
+a -> k: "exits (18:03:48.954)"
+k -> s: "SIGTERM (18:03:48.985)"
+
+**.style.font-size: 30
+(* -> *)[*].style.font-size: 30

@@ -1,0 +1,15 @@
+direction: down
+
+pod: "pod web" {
+  direction: right
+  app: "app container: nginx\nwrites access.log"
+  side: "sidecar: log-shipper\nreads access.log"
+  vol: "shared volume\n/var/log/nginx" {shape: cylinder}
+  app -> vol: "write"
+  vol -> side: "read"
+}
+store: "log storage\noutside the pod"
+pod.side -> store: "ship"
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16

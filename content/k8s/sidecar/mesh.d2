@@ -1,0 +1,22 @@
+direction: down
+
+a: "pod orders" {
+  direction: down
+  app: "app"
+  p: "proxy sidecar"
+  app -> p: "plain HTTP\nto localhost"
+}
+b: "pod payments" {
+  direction: down
+  p: "proxy sidecar"
+  app: "app"
+  p -> app: "plain HTTP"
+}
+cp: "mesh control plane"
+
+a.p -> b.p: "mutual TLS,\nretries, metrics"
+cp -> a.p: "config, certificates"
+cp -> b.p
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16

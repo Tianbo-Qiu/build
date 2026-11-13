@@ -1,0 +1,31 @@
+grid-rows: 1
+grid-columns: 3
+grid-gap: 32
+
+sc: "sidecar:\nadds a feature" {
+  direction: down
+  app: "app"
+  s: "log shipper"
+  out: "log storage"
+  app -> s: "log files"
+  s -> out
+}
+amb: "ambassador:\nproxies outgoing calls" {
+  direction: down
+  app: "app"
+  a: "proxy on localhost"
+  out: "memcache shards"
+  app -> a: "one memcache"
+  a -> out: "many"
+}
+ad: "adapter:\nconverts its output" {
+  direction: down
+  mon: "monitoring system"
+  a: "exporter"
+  app: "app"
+  mon -> a: "scrapes\nstandard metrics"
+  a -> app: "reads the app's\nown format"
+}
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16
