@@ -1,15 +1,15 @@
 +++
-title = 'Ephemeral containers and kubectl debug'
+title = 'kubectl debug'
 date = '2026-11-14T20:51:01Z'
 +++
 
-An ephemeral container is a container added to a {{< term pod >}} that is already running, to inspect it by hand. A pod's containers are fixed when it's created, and `kubectl exec` can only run programs that already exist in a container's image. Many production images have no shell or tools at all: a distroless image holds just the application and its libraries, so `kubectl exec app -- sh` fails with `executable file not found`. The alternative is rebuilding the image with tools and redeploying, which restarts the very pod that showed the problem. An ephemeral container brings its own image, with its own tools, into the pod as it is.
+`kubectl debug` starts a container with its own image and tools to inspect a running {{< term pod >}} or {{< term node >}} by hand. A pod's containers are fixed when it's created, and `kubectl exec` can only run programs that already exist in a container's image. Many production images have no shell or tools at all: a distroless image holds just the application and its libraries, so `kubectl exec app -- sh` fails with `executable file not found`. The alternative is rebuilding the image with tools and redeploying, which restarts the very pod that showed the problem. Instead, `kubectl debug` can add an ephemeral container to the running pod: a new container from another image, which brings its tools into the pod as it is.
 
-`kubectl debug` creates debugging containers in three ways:
+`kubectl debug` works in three ways:
 
 - Ephemeral container: adds a container to the running pod. It shares the pod's network, and with `--target`, the processes of one container.
 - Copy of the pod: creates a new pod from the old one's spec with changes, such as another command or image.
-- Node debugging: creates a pod on a {{< term node >}} that runs in the node's own namespaces, with the node's root filesystem mounted.
+- Node debugging: creates a pod on a node that runs in the node's own namespaces, with the node's root filesystem mounted.
 
 ![Three panels. 1, ephemeral container, added to the running pod: in pod app, a debugger container from busybox sits beside the app container, which has no shell; with --target, the debugger sees the app's processes. 2, copy, a new pod to change: pod crash, which keeps crashing, is copied with --copy-to to pod crash-debug, which has a new command and no labels. 3, node, a pod in the node's namespaces: on node kind-worker, pod node-debugger uses the host network, PID, and IPC namespaces, and mounts the node's root filesystem at /host.](modes.svg)
 
