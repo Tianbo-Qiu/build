@@ -1,0 +1,30 @@
+grid-rows: 1
+grid-columns: 3
+grid-gap: 24
+
+eph: "1. ephemeral\ncontainer" {
+  direction: down
+  pod: "pod app" {
+    direction: down
+    dbg: "debugger\nbusybox"
+    app: "app\nno shell"
+    dbg -> app: "--target:\nsees its\nprocesses"
+  }
+}
+copy: "2. copy of\nthe pod" {
+  direction: down
+  orig: "pod crash\ncrashing"
+  cp: "pod\ncrash-debug\nnew command,\nno labels"
+  orig -> cp: "--copy-to"
+}
+node: "3. node\ndebugging" {
+  direction: down
+  n: "node kind-worker" {
+    direction: down
+    dbg: "pod\nnode-debugger\nhost network,\nPID, IPC"
+    root: "node's /\nat /host"
+    dbg -> root: "mounts"
+  }
+}
+
+(** -> **)[*].style.font-size: 20
