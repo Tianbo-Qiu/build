@@ -1,0 +1,29 @@
+grid-rows: 1
+grid-columns: 3
+grid-gap: 100
+
+yes: "reach pod web" {
+  grid-columns: 1
+  grid-gap: 16
+  a: "a container in\nthe same pod:\nlocalhost"
+  b: "a pod on any node:\npod IP, no NAT"
+  c: "the kubelet on\nweb's node:\nhealth checks"
+  d: "another node:\nyes on kind,\nnot required"
+}
+mid: "" {
+  style.fill: transparent
+  style.stroke: transparent
+  web: "pod web\n10.244.2.6"
+}
+no: "don't reach\npod web" {
+  grid-columns: 1
+  grid-gap: 16
+  a: "a pod denied by\na NetworkPolicy"
+  b: "a laptop or\ncontainer outside\nthe cluster:\nno route to\nthe pod range"
+}
+
+yes -> mid.web: "connect"
+no -> mid.web: "no connection"
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16

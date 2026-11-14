@@ -1,0 +1,12 @@
+direction: right
+
+w2: "node kind-worker2: 172.21.0.2\npod range 10.244.1.0/24" {
+  client: "pod client\n10.244.1.6"
+}
+w1: "node kind-worker: 172.21.0.4\npod range 10.244.2.0/24" {
+  web: "pod web\n10.244.2.5"
+}
+
+w2.client -> w1.web: "to 10.244.2.5,\nfrom 10.244.1.6: no NAT"
+w2 -> w1.web: "node to pod"
+

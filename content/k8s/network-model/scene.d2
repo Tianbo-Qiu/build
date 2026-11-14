@@ -1,0 +1,51 @@
+grid-columns: 1
+grid-gap: 60
+
+outside: "outside the cluster" {
+  grid-columns: 2
+  grid-gap: 30
+  laptop: "the Mac\nrunning kind"
+  ctr: "container on kind's\nDocker network"
+}
+
+cluster: "cluster: pods in 10.244.0.0/16" {
+  grid-columns: 2
+  grid-gap: 60
+  w2: "kind-worker2\n172.21.0.2\npods 10.244.1.0/24" {
+    grid-columns: 1
+    grid-gap: 24
+    agent: "the node itself"
+    client: "pod client\n10.244.1.6"
+    denied: "pod denied by\nNetworkPolicy"
+  }
+  w1: "kind-worker\n172.21.0.4\npods 10.244.2.0/24" {
+    grid-columns: 1
+    grid-gap: 50
+    web: "pod web 10.244.2.6" {
+      grid-columns: 2
+      grid-gap: 120
+      nginx: "nginx :80"
+      side: "sidecar"
+    }
+    helpers: "" {
+      style.fill: transparent
+      style.stroke: transparent
+      grid-columns: 2
+      grid-gap: 24
+      kubelet: "kubelet"
+      neighbor: "pod neighbor"
+    }
+  }
+}
+
+outside.laptop -> cluster.w1.web.nginx: "no route"
+outside.ctr -> cluster.w1.web.nginx: "no route"
+cluster.w2.agent -> cluster.w1.web.nginx: "yes on kind"
+cluster.w2.client -> cluster.w1.web.nginx: "yes, no NAT"
+cluster.w2.denied -> cluster.w1.web.nginx: "no: times out"
+cluster.w1.web.side -> cluster.w1.web.nginx: "localhost"
+cluster.w1.helpers.kubelet -> cluster.w1.web.nginx: "probes"
+cluster.w1.helpers.neighbor -> cluster.w1.web.nginx: "yes"
+
+**.style.font-size: 20
+(** -> **)[*].style.font-size: 20
