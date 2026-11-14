@@ -24,7 +24,7 @@ The same tests, drawn where each source really sits in the kind cluster. Every a
 
 ![The kind cluster in detail. Outside the cluster, at the top, the Mac running kind and a container on kind's Docker network each try to reach nginx and get no route. Inside the cluster, whose pods use 10.244.0.0/16, node kind-worker2 at 172.21.0.2, with pods in 10.244.1.0/24, holds three sources: the node itself, which reaches nginx on kind; pod client at 10.244.1.6, which reaches it with no NAT; and a pod denied by a NetworkPolicy, which times out. Node kind-worker at 172.21.0.4, with pods in 10.244.2.0/24, holds pod web at 10.244.2.6, which contains nginx on port 80 and a sidecar that reaches nginx over localhost. Below pod web on the same node, the kubelet reaches nginx with its probes, and pod neighbor reaches it too.](scene.svg)
 
-The outside sources show that pod IPs are addresses inside the cluster. A container started with `docker run --network kind`, on the same Docker network as the nodes, couldn't connect to the pod IP, and neither could the Mac running kind. Neither knows that `10.244.0.0/16` lives behind the nodes. Clients outside the cluster reach pods through a [Service]({{< ref "/k8s/service" >}}) instead.
+The outside sources show that pod IPs are addresses inside the cluster. A container started with `docker run --network kind`, on the same Docker network as the nodes, couldn't connect to the pod IP, and neither could the Mac running kind. Neither knows that `10.244.0.0/16` lives behind the nodes. Clients outside the cluster reach pods through a [Service]({{< ref "/k8s/service" >}}) instead. For testing, [Reaching a pod while testing]({{< ref "/k8s/reaching-a-pod" >}}) shows three direct routes.
 
 ## Four kinds of traffic
 

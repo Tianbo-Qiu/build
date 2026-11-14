@@ -1,0 +1,28 @@
+direction: down
+
+laptop: "laptop" {
+  shell: "curl localhost:8080"
+  pf: "kubectl port-forward\npod/web 8080:80"
+  shell -> pf
+}
+cluster: "cluster" {
+  api: "API server"
+  w1: "node kind-worker" {
+    sh: "shell on the node:\ncurl 10.244.2.9"
+    kubelet: "kubelet"
+    web: "pod web 10.244.2.9" {
+      nginx: "nginx :80"
+    }
+    sh -> web.nginx: "1. from the node\nseen as 10.244.2.1"
+    kubelet -> web.nginx: "3. inside the pod,\nto localhost:80\nseen as 127.0.0.1"
+  }
+  w2: "node kind-worker2" {
+    tmp: "temporary pod tmp\n10.244.1.7"
+  }
+  w2.tmp -> w1.web.nginx: "2. from a pod\nseen as 10.244.1.7"
+  api -> w1.kubelet: "stream"
+}
+laptop.pf -> cluster.api: "3. stream over the\nKubernetes API"
+
+**.style.font-size: 16
+(** -> **)[*].style.font-size: 16
