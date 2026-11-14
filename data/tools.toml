@@ -22,6 +22,17 @@ desc = 'A diagram scripting language that turns text into diagrams, rendered to 
 site = 'https://d2lang.com'
 source = 'https://github.com/d2lang/d2'
 
+[envoy]
+name = 'Envoy'
+org = 'CNCF'
+org_url = 'https://www.cncf.io'
+category = 'Networking'
+desc = 'An open-source proxy, written in C++, for traffic at the edge of a network and between services, often run as a sidecar beside each application.'
+site = 'https://www.envoyproxy.io'
+docs = 'https://www.envoyproxy.io/docs/envoy/latest/'
+source = 'https://github.com/envoyproxy/envoy'
+note = '/k8s/sidecar'
+
 [headlamp]
 name = 'Headlamp'
 org = 'Kubernetes SIGs'

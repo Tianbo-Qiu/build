@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <article data-pagefind-body>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{- $links := slice }}
+    {{- range $id, $l := site.Data.links }}
+      {{- $links = $links | append (dict "id" $id "key" (lower $l.name) "cat" $l.category "l" $l) }}
+    {{- end }}
+    {{- range (sort (uniq (apply $links "index" "." "cat")) "value") }}
+      {{- $cat := . }}
+      <h2>{{ $cat }}</h2>
+      <dl class="tools">
+        {{- range sort (where $links "cat" $cat) "key" }}
+          <dt id="{{ .id }}"><a href="{{ .l.url }}">{{ .l.name }}</a></dt>
+          <dd>
+            {{ .l.desc }}
+            {{- with .l.note }}{{ with site.GetPage . }}<span class="tool-links">Used in <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></span>{{ else }}{{ errorf "data/links.toml: no page %q" . }}{{ end }}{{ end }}
+          </dd>
+        {{- end }}
+      </dl>
+    {{- end }}
+  </article>
+{{ end }}

@@ -1,0 +1,15 @@
+# Links listed on /links/. Each entry: name, category (the page's
+# headings), desc (one sentence, starting with what kind of thing it
+# is), and url. note links to a note on this site that uses the link.
+
+[cncf]
+name = 'Cloud Native Computing Foundation (CNCF)'
+category = 'Organizations'
+desc = 'A foundation, part of the nonprofit Linux Foundation, that hosts open-source projects such as Kubernetes, Prometheus, and Envoy, and ranks them as sandbox, incubating, or graduated.'
+url = 'https://www.cncf.io'
+
+[cncf-landscape]
+name = 'CNCF Landscape'
+category = 'Catalogs'
+desc = 'A map of projects and products in the cloud native space, grouped by category.'
+url = 'https://landscape.cncf.io'
