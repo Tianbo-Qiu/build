@@ -27,7 +27,7 @@ A topology is the pattern of links between nodes. It decides what each link cost
 - Round-trip time (RTT): latency there and back, which is what `ping` reports. Every request that waits for a reply costs at least one RTT.
 - Jitter: how much latency varies from one packet to the next.
 
-Bandwidth decides how long large transfers take; latency decides how long small ones take. More bandwidth doesn't lower latency. Two containers on one host, with the server's traffic shaped by Linux's `tc netem`, fetched files over HTTP, each on a new TCP connection:
+Bandwidth decides how long large transfers take; latency decides how long small ones take. More bandwidth doesn't lower latency. Two containers on one host, with the server's traffic shaped by Linux's `tc netem`, fetched files over HTTP, each on a new {{< term tcp TCP >}} connection:
 
 | Link | RTT | 1 KB | 10 MB | 20 × 1 KB, one after another |
 |---|---|---|---|---|
@@ -86,7 +86,7 @@ Other headers: UDP 8 bytes, IPv6 40 bytes. A frame's payload has a maximum size,
 ## Addresses at each layer
 
 - MAC address, 48 bits, such as `02:d4:68:4a:85:f1`: names a network interface on one link. A router replaces the frame and its MAC addresses at every hop.
-- IP address: names a host's interface across networks, and stays the same from end to end, apart from address translation (NAT). IPv4 addresses are 32 bits, such as `172.22.0.2`; IPv6 addresses are 128 bits.
+- IP address: names a host's interface across networks, and stays the same from end to end, apart from address translation ({{< term nat NAT >}}). IPv4 addresses are 32 bits, such as `172.22.0.2`; IPv6 addresses are 128 bits.
 - Port, 16 bits, 0 to 65535: names an endpoint inside a host, so many programs share one IP address. Servers listen on known ports, such as 80 for HTTP; a client's operating system picks a temporary port for each connection, such as 38976.
 - Host name: a name for people, such as `web`, which DNS turns into an IP address before anything is sent.
 

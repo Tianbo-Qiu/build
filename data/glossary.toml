@@ -154,3 +154,115 @@ def = 'A fluent statement from a language model that is false. Models produce li
 name = 'rubric'
 note = '/ai/evals'
 def = 'A written list of criteria that an output is graded against, such as "the chart has a title". Each criterion is often passed or failed, and the passes are added up.'
+
+[tool-use]
+name = 'tool use'
+note = '/ai/tool-use'
+def = 'A way for an LLM to ask the application around it to run a named function with given arguments, and to read the result. Also called function calling.'
+
+[mcp]
+name = 'MCP'
+note = '/ai/tool-use'
+def = 'Model Context Protocol: an open standard, published by Anthropic in November 2024, that lets one program, an MCP server, offer tools to any application that speaks it, over JSON-RPC.'
+
+[prompt-injection]
+name = 'prompt injection'
+note = '/ai/tool-use'
+def = "An attack that hides instructions in text an LLM reads, such as a web page or a tool result, so that the model follows them instead of its application's instructions."
+
+[reflection]
+name = 'reflection'
+note = '/ai/agentic-patterns'
+def = 'An agentic pattern in which an LLM critiques an output, often its own draft, and then revises it, over one or more rounds.'
+
+[chain-of-thought]
+name = 'chain-of-thought'
+note = '/ai/prompting'
+def = 'A prompting technique in which the model writes out intermediate reasoning steps before its answer, which improves results on multi-step problems.'
+
+[eval]
+name = 'eval'
+note = '/ai/evals'
+def = 'A fixed set of test inputs run through an LLM application, with a way to score each output, so that versions of the application can be compared.'
+
+[llm-as-a-judge]
+name = 'LLM-as-a-judge'
+note = '/ai/evals'
+def = 'Using an LLM to grade outputs, such as against a rubric or by comparing two answers. Judges have known biases, such as favoring the first or the longer answer.'
+
+[network-namespace]
+name = 'network namespace'
+note = '/k8s/container/namespace'
+def = 'A Linux namespace that gives a group of processes their own network interfaces, IP addresses, routes, and ports. The containers in a pod share one.'
+
+[sidecar-container]
+name = 'sidecar container'
+note = '/k8s/sidecar'
+def = "A helper container in a pod that runs beside the main application for the pod's whole life, adding a feature such as log shipping or a proxy."
+
+[init-container]
+name = 'init container'
+def = 'A container in a pod that runs to completion before the app containers start, for setup work such as waiting for a dependency.'
+
+[ephemeral-container]
+name = 'ephemeral container'
+note = '/k8s/kubectl-debug'
+def = 'A container added to a running pod for troubleshooting, usually with kubectl debug. It is never restarted and stays in the pod until the pod is deleted.'
+
+[network-policy]
+name = 'NetworkPolicy'
+note = '/k8s/network-model'
+def = 'A Kubernetes object that limits which traffic may reach or leave selected pods. The network plugin enforces it; a plugin without support ignores it.'
+
+[cni-plugin]
+name = 'CNI plugin'
+note = '/k8s/network-model'
+def = "A program, called through the Container Network Interface, that connects a new pod's network namespace to the cluster network and gives the pod its IP address, such as Calico, Cilium, or Flannel."
+
+[service-mesh]
+name = 'service mesh'
+note = '/k8s/sidecar'
+def = 'A layer of proxies, often one sidecar per pod, that carries the traffic between services and adds encryption, retries, and metrics. Istio is one.'
+
+[osi-model]
+name = 'OSI model'
+note = '/networking/basics'
+def = 'A seven-layer reference model of networking from ISO, from the physical layer up to the application layer. Names such as "layer 2" and "layer 7" come from it.'
+
+[bandwidth]
+name = 'bandwidth'
+note = '/networking/basics'
+def = 'How much data a link can carry per second, measured in bits per second.'
+
+[latency]
+name = 'latency'
+note = '/networking/basics'
+def = "The time data takes to get from sender to receiver. It decides how long small transfers take, and more bandwidth doesn't lower it."
+
+[rtt]
+name = 'RTT'
+note = '/networking/basics'
+def = 'Round-trip time: the time for data to reach the other end and a reply to come back. Each request that waits for a reply costs at least one.'
+
+[tcp]
+name = 'TCP'
+def = 'Transmission Control Protocol: the transport protocol that gives two programs a reliable, ordered stream of bytes over IP, on a connection opened with a handshake.'
+
+[ip-address]
+name = 'IP address'
+note = '/networking/basics'
+def = "The address that names a host's network interface across networks: 32 bits in IPv4, such as 10.244.2.5, and 128 bits in IPv6."
+
+[port]
+name = 'port'
+note = '/networking/basics'
+def = 'A 16-bit number that names an endpoint inside a host, so that many programs can share one IP address. Servers listen on known ports, such as 80 for HTTP.'
+
+[mtu]
+name = 'MTU'
+note = '/networking/basics'
+def = 'Maximum transmission unit: the largest payload one frame on a link can carry, 1,500 bytes on standard Ethernet.'
+
+[nat]
+name = 'NAT'
+def = 'Network address translation: rewriting the IP addresses, and often the ports, of packets as they pass a router, such as to share one public address among many hosts.'

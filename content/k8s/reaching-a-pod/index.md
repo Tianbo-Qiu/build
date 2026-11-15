@@ -52,9 +52,9 @@ pod/web | The pod. A Deployment or Service name also works; kubectl then picks o
 8080:80 | Local port 8080 to the pod's port 80. With one number, both ports are the same.
 {{< /parts >}}
 
-It printed `Forwarding from 127.0.0.1:8080 -> 80` and the same for `[::1]`, and stays in the foreground until stopped. In a second terminal, `curl localhost:8080` returned nginx's page. The connection travels as a stream from kubectl to the {{< term api-server >}}, which passes it to the {{< term kubelet >}} on the pod's node; the API server's connections to kubelets exist for logs, attaching, and port forwarding. The connection to the pod is opened inside the pod's own network namespace, so nginx logged the client as `127.0.0.1`.
+It printed `Forwarding from 127.0.0.1:8080 -> 80` and the same for `[::1]`, and stays in the foreground until stopped. In a second terminal, `curl localhost:8080` returned nginx's page. The connection travels as a stream from kubectl to the {{< term api-server >}}, which passes it to the {{< term kubelet >}} on the pod's node; the API server's connections to kubelets exist for logs, attaching, and port forwarding. The connection to the pod is opened inside the pod's own {{< term network-namespace "network namespace" >}}, so nginx logged the client as `127.0.0.1`.
 
-- It forwards TCP only.
+- It forwards {{< term tcp TCP >}} only.
 - It needs permission to create `pods/portforward`. It reaches the pod without crossing the pod network, and the docs warn that it may bypass network-level controls.
 - It's for testing: one kubectl process, one laptop, and it stops when kubectl stops.
 

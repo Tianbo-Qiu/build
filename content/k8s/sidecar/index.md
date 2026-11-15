@@ -3,7 +3,7 @@ title = 'Sidecar containers'
 date = '2026-11-13T18:06:04Z'
 +++
 
-A sidecar container is a second container in a {{< term pod >}} that adds a feature to the main application, such as shipping its logs or encrypting its traffic, without changing the application's code. The containers in one pod run on the same node, share one network namespace, and can share {{< term volume "volumes" >}}. So a sidecar can read the files the application writes and reach it on `localhost`. The alternative is building the feature into every application, in every language, and updating each one when the feature changes. A sidecar is built once, as its own image, and added to any pod.
+A sidecar container is a second container in a {{< term pod >}} that adds a feature to the main application, such as shipping its logs or encrypting its traffic, without changing the application's code. The containers in one pod run on the same node, share one {{< term network-namespace "network namespace" >}}, and can share {{< term volume "volumes" >}}. So a sidecar can read the files the application writes and reach it on `localhost`. The alternative is building the feature into every application, in every language, and updating each one when the feature changes. A sidecar is built once, as its own image, and added to any pod.
 
 A pod with a sidecar has these parts:
 
