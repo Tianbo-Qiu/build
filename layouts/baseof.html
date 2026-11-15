@@ -8,7 +8,10 @@
   <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
   <link rel="preload" href="{{ "fonts/libre-baskerville.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+  <script>try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  {{- with resources.Get "css/syntax.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{- end }}
   {{- partial "analytics.html" . }}
   <style>
     @font-face { font-family: "Libre Baskerville"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("{{ "fonts/libre-baskerville.woff2" | relURL }}") format("woff2"); }
@@ -22,9 +25,12 @@
       --sans: "Libre Franklin", system-ui, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     }
+    /* Dark follows the system unless the reader picked a theme (data-theme on html). */
     @media (prefers-color-scheme: dark) {
-      :root { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; --mark: #383838; }
+      :root:not([data-theme="light"]) { --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; --mark: #383838; }
     }
+    :root[data-theme="dark"] { color-scheme: dark; --fg: #ddd; --muted: #999; --bg: #111; --link: #8ab4f8; --line: #333; --code-bg: #1a1a1a; --mark: #383838; }
+    :root[data-theme="light"] { color-scheme: light; }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.75 var(--serif); }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -38,6 +44,8 @@
     nav .home { display: inline-block; margin-bottom: .4rem; }
     nav .search { display: block; width: fit-content; padding: .15rem 0; margin-bottom: .6rem; }
     nav .search kbd { display: inline-block; margin-left: .4rem; color: var(--muted); font: .8em var(--sans); }
+    nav .theme { display: block; min-height: 24px; margin: -.4rem 0 .6rem; padding: .15rem 0; border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer; }
+    nav .theme:hover { color: var(--fg); }
     /* Pagefind sets its defaults on :root, so the overrides go on body. */
     body {
       --pf-font: var(--sans); --pf-text: var(--fg); --pf-text-secondary: var(--fg); --pf-text-muted: var(--muted);
@@ -104,7 +112,10 @@
       nav { border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
       nav > ul { display: none; }
       nav { display: flex; justify-content: space-between; align-items: baseline; }
-      nav .home, nav .search { margin: 0; }
+      nav { justify-content: flex-start; }
+      nav .home, nav .search, nav .theme { margin: 0; }
+      nav .search { margin-left: auto; }
+      nav .theme { margin-left: 1rem; }
       nav .search kbd { display: none; }
       .crumbs { font-size: .95rem; line-height: 2; }
       .wide img { max-width: none; width: 40rem; }
@@ -117,6 +128,7 @@
     <nav>
       <a class="home" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
       <a class="search" id="search-link" href="{{ "search/" | relURL }}"{{ if eq .Layout "search" }} aria-current="page"{{ end }}>Search</a>
+      <button class="theme" id="theme" type="button" hidden></button>
       {{ partial "tree.html" (dict "section" site.Home "current" .) }}
     </nav>
     <main id="main">
@@ -189,6 +201,23 @@
         }, function () { location.href = link.href; });
       });
     });
+
+    // Theme: follow the system, or keep the reader's choice of light or dark.
+    (function () {
+      var button = document.getElementById("theme");
+      var order = ["auto", "light", "dark"];
+      function current() { return document.documentElement.dataset.theme || "auto"; }
+      function show() { button.textContent = "Theme: " + current(); }
+      button.addEventListener("click", function () {
+        var next = order[(order.indexOf(current()) + 1) % order.length];
+        if (next === "auto") delete document.documentElement.dataset.theme;
+        else document.documentElement.dataset.theme = next;
+        try { if (next === "auto") localStorage.removeItem("theme"); else localStorage.setItem("theme", next); } catch (e) {}
+        show();
+      });
+      show();
+      button.hidden = false;
+    })();
 
     // Cmd+K / Ctrl+K opens a search overlay. Pagefind loads on first use.
     (function () {

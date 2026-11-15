@@ -75,6 +75,7 @@ The one exception is the home page robot (`layouts/_partials/robot.html`, shown 
 
 - Layout: a left sidebar shows the whole topic tree, always expanded, with the current page in bold. A breadcrumb sits above each title. The page stays left-aligned on wide screens.
 - A "Search" link sits under the site title and opens the search page. A muted "⌘K" hint beside it points to the overlay shortcut.
+- A muted "Theme: auto" button sits under the Search link (beside it on phones) and cycles auto, light, and dark. Auto follows the system. A choice is stored in `localStorage` and set as `data-theme` on `<html>` by a small script in `<head>`, before the page draws; colors switch through the `--` tokens, and `color-scheme` makes the diagrams, which carry their own dark styles, follow along. Without JavaScript the button is hidden and the system setting applies.
 - Phones (under 48rem): the tree is hidden. Navigation is the site title, the Search link, the breadcrumb, and section pages that list their notes.
 - Type: Libre Baskerville body at 16px with line height 1.75, Libre Franklin for headings and navigation, JetBrains Mono for code. Fonts are self-hosted in `static/fonts/` (Latin subset, OFL licenses alongside).
 - The text column is 36rem, about 65 characters per line.
@@ -85,7 +86,7 @@ The one exception is the home page robot (`layouts/_partials/robot.html`, shown 
 - Command parts (`parts` shortcode) show the command in a code block with each part's explanation listed below it, behind a thin left rule. Pointing at a part, in the command or the list, highlights both. Defaults are muted and hidden behind a Show defaults button; without JavaScript they stay visible.
 - Glossary terms have a muted dashed underline. Their definition box is flat, with a border and no shadow, and stays inside the screen. Escape closes it.
 - Code uses JetBrains Mono with ligatures turned off, so text such as `<|im_end|>` or `->` shows exactly as typed.
-- Code blocks use flat grey backgrounds. Syntax colors come from `static/css/syntax.css`, generated with `hugo gen chromastyles` (`github` for light, `github-dark` for dark, each scoped to its color mode, backgrounds removed).
+- Code blocks use flat grey backgrounds. Syntax colors come from `assets/css/syntax.css`, generated with `hugo gen chromastyles` (`github` for light, `github-dark` for dark, each scoped to its color mode and to the matching `data-theme`, backgrounds removed). Hugo fingerprints the file, so a changed version gets a new URL.
 
 - The site mark is a triangle of three blue scan-line pieces. `static/favicon.svg` is the source; `favicon.ico` (32px), `apple-touch-icon.png` (180px, white background), and `icon-512.png` (profile picture) are rendered from it.
 
