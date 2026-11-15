@@ -1,28 +1,40 @@
-direction: down
+grid-rows: 1
+grid-columns: 2
+grid-gap: 40
 
-laptop: "laptop" {
-  shell: "curl localhost:8080"
-  pf: "kubectl port-forward\npod/web 8080:80"
-  shell -> pf
+col: "" {
+  style.fill: transparent
+  style.stroke: transparent
+  grid-columns: 1
+  grid-gap: 40
+n: "1. from the node" {
+  grid-columns: 1
+  grid-gap: 90
+  sh: "shell on\nkind-worker:\ncurl 10.244.2.9"
+  web: "nginx in pod web\n10.244.2.9"
+  sh -> web: "seen as\n10.244.2.1"
 }
-cluster: "cluster" {
+p: "2. from a pod" {
+  grid-columns: 1
+  grid-gap: 90
+  tmp: "pod tmp\n10.244.1.7\non kind-worker2"
+  web: "nginx in pod web\n10.244.2.9"
+  tmp -> web: "seen as\n10.244.1.7"
+}
+}
+f: "3. port forwarding" {
+  grid-columns: 1
+  grid-gap: 80
+  curl: "laptop:\ncurl localhost:8080"
+  pf: "kubectl\nport-forward\npod/web 8080:80"
   api: "API server"
-  w1: "node kind-worker" {
-    sh: "shell on the node:\ncurl 10.244.2.9"
-    kubelet: "kubelet"
-    web: "pod web 10.244.2.9" {
-      nginx: "nginx :80"
-    }
-    sh -> web.nginx: "1. from the node\nseen as 10.244.2.1"
-    kubelet -> web.nginx: "3. inside the pod,\nto localhost:80\nseen as 127.0.0.1"
-  }
-  w2: "node kind-worker2" {
-    tmp: "temporary pod tmp\n10.244.1.7"
-  }
-  w2.tmp -> w1.web.nginx: "2. from a pod\nseen as 10.244.1.7"
-  api -> w1.kubelet: "stream"
+  kubelet: "kubelet on\nkind-worker"
+  web: "nginx in pod web,\nvia localhost:80"
+  curl -> pf
+  pf -> api: "stream"
+  api -> kubelet: "stream"
+  kubelet -> web: "seen as\n127.0.0.1"
 }
-laptop.pf -> cluster.api: "3. stream over the\nKubernetes API"
 
-**.style.font-size: 16
-(** -> **)[*].style.font-size: 16
+**.style.font-size: 20
+(** -> **)[*].style.font-size: 18

@@ -1,9 +1,10 @@
-grid-rows: 1
-grid-columns: 3
-grid-gap: 100
+grid-rows: 3
+grid-columns: 1
+grid-gap: 70
 
 yes: "reach pod web" {
-  grid-columns: 1
+  grid-rows: 2
+  grid-columns: 2
   grid-gap: 16
   a: "a container in\nthe same pod:\nlocalhost"
   b: "a pod on any node:\npod IP, no NAT"
@@ -15,15 +16,16 @@ mid: "" {
   style.stroke: transparent
   web: "pod web\n10.244.2.6"
 }
-no: "don't reach\npod web" {
-  grid-columns: 1
+no: "don't reach pod web" {
+  grid-rows: 1
+  grid-columns: 2
   grid-gap: 16
   a: "a pod denied by\na NetworkPolicy"
-  b: "a laptop or\ncontainer outside\nthe cluster:\nno route to\nthe pod range"
+  b: "outside the cluster:\nno route to\nthe pod range"
 }
 
 yes -> mid.web: "connect"
 no -> mid.web: "no connection"
 
-**.style.font-size: 16
-(** -> **)[*].style.font-size: 16
+**.style.font-size: 20
+(** -> **)[*].style.font-size: 20

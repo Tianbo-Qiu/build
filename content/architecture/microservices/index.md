@@ -21,7 +21,7 @@ A microservice system has a few parts:
 
 The same features can be built either way. The difference is where the boundaries are and what crosses them:
 
-![On the left, a monolith: one application process holds orders, users, and payments modules, where orders calls payments by a function call, and all share one database. On the right, microservices: separate orders, users, and payments services, each with its own database, where orders calls payments by a network call.](compare.svg)
+![At the top, a monolith: one application process holds orders, users, and payments modules, where orders calls payments by a function call, and all share one database. Below it, microservices: separate orders, users, and payments services, each with its own database, where orders calls payments by a network call.](compare.svg)
 
 | | Monolith | Microservices |
 |---|---|---|

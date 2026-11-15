@@ -18,7 +18,7 @@ The model has these rules:
 
 The rules say who must reach a pod. Everything else depends on the cluster. On kind, an nginx pod `web` on kind-worker was tested from each kind of source:
 
-![Pod web at 10.244.2.6 in the middle. On the left, the sources that reach it and connect: a container in the same pod, over localhost; a pod on any node, by pod IP with no NAT; the kubelet on web's node, for health checks; and another node, which works on kind but isn't required. On the right, the sources that don't reach it and get no connection: a pod denied by a NetworkPolicy, and a laptop or container outside the cluster, which has no route to the pod range.](reach.svg)
+![Pod web at 10.244.2.6 in the middle. Above it, the sources that reach it and connect: a container in the same pod, over localhost; a pod on any node, by pod IP with no NAT; the kubelet on web's node, for health checks; and another node, which works on kind but isn't required. Below it, the sources that don't reach it and get no connection: a pod denied by a NetworkPolicy, and a laptop or container outside the cluster, which has no route to the pod range.](reach.svg)
 
 The same tests, drawn where each source really sits in the kind cluster. Every arrow ends at nginx in pod web, and its label is what happened:
 

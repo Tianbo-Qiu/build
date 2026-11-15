@@ -1,20 +1,29 @@
-direction: down
+grid-rows: 1
+grid-columns: 3
+grid-gap: 40
 
 w2: "node kind-worker2" {
-  direction: down
-  pod: "pod client: eth0 10.244.1.6"
-  veth: "veth pair: the pod's eth0\nis one end, the node holds the other"
-  rt: "node route table:\n10.244.2.0/24 via 172.21.0.4"
+  grid-columns: 1
+  grid-gap: 50
+  pod: "pod client:\neth0 10.244.1.6"
+  veth: "veth pair:\npod end, node end"
+  rt: "route table:\n10.244.2.0/24\nvia 172.21.0.4"
   pod -> veth -> rt
 }
-net: "network between nodes"
-w1: "node kind-worker" {
-  direction: down
-  rt: "node route table:\n10.244.2.5 dev veth5f02253a"
-  pod: "pod web: eth0 10.244.2.5"
-  rt -> pod
+mid: "" {
+  style.fill: transparent
+  style.stroke: transparent
+  net: "network\nbetween\nnodes"
 }
-w2.rt -> net -> w1.rt
+w1: "node kind-worker" {
+  grid-columns: 1
+  grid-gap: 50
+  rt: "route table:\n10.244.2.5 dev\nveth5f02253a"
+  veth: "veth pair:\nnode end, pod end"
+  pod: "pod web:\neth0 10.244.2.5"
+  rt -> veth -> pod
+}
+w2.rt -> mid.net -> w1.rt
 
-**.style.font-size: 16
-(** -> **)[*].style.font-size: 16
+**.style.font-size: 18
+(** -> **)[*].style.font-size: 18
