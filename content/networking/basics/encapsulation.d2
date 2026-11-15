@@ -1,0 +1,38 @@
+grid-rows: 4
+grid-columns: 1
+grid-gap: 12
+
+classes: {
+  eth: {label: "Eth\n14"; width: 72}
+  ip: {label: "IPv4\n20"; width: 100}
+  tcp: {label: "TCP\n32"; width: 160}
+  http: {label: "HTTP request\n67"; width: 335}
+  row: {grid-rows: 1; grid-gap: 0; style.stroke-width: 0; style.fill: transparent}
+  pad: {label: ""; style.opacity: 0}
+}
+
+app: "application: HTTP message, 67 bytes" {
+  class: row
+  s: {class: pad; width: 332}
+  h.class: http
+}
+tr: "transport: TCP segment, 99 bytes" {
+  class: row
+  s: {class: pad; width: 172}
+  t.class: tcp
+  h.class: http
+}
+net: "internet: IP datagram, 119 bytes" {
+  class: row
+  s: {class: pad; width: 72}
+  i.class: ip
+  t.class: tcp
+  h.class: http
+}
+eth: "link: Ethernet frame, 133 bytes" {
+  class: row
+  e.class: eth
+  i.class: ip
+  t.class: tcp
+  h.class: http
+}

@@ -1,0 +1,76 @@
+grid-rows: 3
+grid-columns: 2
+grid-gap: 24
+
+classes: {
+  n: {shape: circle; width: 32; height: 32; label: ""}
+  gap: {shape: circle; width: 56; height: 56; label: ""; style.opacity: 0}
+}
+
+p2p: "point-to-point" {
+  direction: right
+  a.class: n
+  b.class: n
+  a -- b
+}
+chain: "daisy chain:\none break splits it" {
+  direction: right
+  a.class: n
+  b.class: n
+  c.class: n
+  d.class: n
+  a -- b -- c -- d
+}
+bus: "bus: one shared line" {
+  direction: down
+  line: "shared line" {width: 200; height: 24; style.font-size: 16}
+  a.class: n
+  b.class: n
+  c.class: n
+  a -- line
+  b -- line
+  c -- line
+}
+star: "star: the hub is a\nsingle point of failure" {
+  grid-rows: 3
+  grid-columns: 3
+  grid-gap: 40
+  x1.class: gap
+  a: {class: n; width: 56; height: 56}
+  x2.class: gap
+  b: {class: n; width: 56; height: 56}
+  hub: "hub" {shape: circle; width: 56; height: 56; style.font-size: 16}
+  c: {class: n; width: 56; height: 56}
+  x3.class: gap
+  d: {class: n; width: 56; height: 56}
+  x4.class: gap
+  hub -- a
+  hub -- b
+  hub -- c
+  hub -- d
+}
+ring: "ring: each node\nforwards to the next" {
+  grid-rows: 2
+  grid-columns: 2
+  grid-gap: 80
+  a.class: n
+  b.class: n
+  c.class: n
+  d.class: n
+  a -- b -- d -- c -- a
+}
+mesh: "full mesh: a link\nbetween every pair" {
+  grid-rows: 2
+  grid-columns: 2
+  grid-gap: 80
+  a.class: n
+  b.class: n
+  c.class: n
+  d.class: n
+  a -- b
+  a -- c
+  a -- d
+  b -- c
+  b -- d
+  c -- d
+}
