@@ -1,0 +1,51 @@
+{{ define "main" }}
+  <article data-pagefind-body>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{- with site.GetPage "/days" }}
+      {{- with .RegularPages }}
+        <h2>Days</h2>
+        {{- range .GroupByDate "January 2006" }}
+          {{- $pages := .Pages }}
+          {{- $first := (index $pages 0).Date }}
+          {{- $first = $first.AddDate 0 0 (sub 1 $first.Day) }}
+          {{- $days := ($first.AddDate 0 1 -1).Day }}
+          <table class="cal">
+            <caption>{{ .Key }}</caption>
+            <thead><tr>{{ range slice "S" "M" "T" "W" "T" "F" "S" }}<th>{{ . }}</th>{{ end }}</tr></thead>
+            <tbody><tr>
+              {{- range seq (int $first.Weekday) }}<td></td>{{ end }}
+              {{- range $d := seq $days }}
+                {{- $day := $first.AddDate 0 0 (sub $d 1) }}
+                {{- if and (gt $d 1) (eq (int $day.Weekday) 0) }}</tr><tr>{{ end }}
+                {{- with where $pages "Date.Day" $d }}
+                  {{- $p := index . 0 }}
+                  {{- $l := "" }}{{ with $p.Params.label }}{{ $l = index site.Data.days . }}{{ end }}
+                  <td><a href="#{{ $day.Format "2006-01-02" }}" title="{{ with $l }}{{ .name }}: {{ end }}{{ $p.Title }}"{{ with $l }} style="--day: {{ .light }}; --day-dark: {{ .dark }}"{{ end }}>{{ $d }}</a></td>
+                {{- else }}
+                  <td>{{ $d }}</td>
+                {{- end }}
+              {{- end }}
+            </tr></tbody>
+          </table>
+          {{- range $pages }}
+            <details class="day" id="{{ .Date.Format "2006-01-02" }}">
+              {{- $l := "" }}{{ with .Params.label }}{{ $l = index site.Data.days . }}{{ end }}
+              <summary><time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "Jan 2, 3:04 PM" }}</time>{{ with $l }} <span class="label" style="--day: {{ .light }}; --day-dark: {{ .dark }}">{{ .name }}</span>{{ end }}<span class="what">{{ .Title }}</span></summary>
+              {{ .Content }}
+            </details>
+          {{- end }}
+        {{- end }}
+        <script>
+          // A marked day opens its entry, and following a link to one opens it too.
+          function openDay() {
+            var d = location.hash && document.getElementById(location.hash.slice(1));
+            if (d && d.tagName === "DETAILS") d.open = true;
+          }
+          addEventListener("hashchange", openDay);
+          openDay();
+        </script>
+      {{- end }}
+    {{- end }}
+  </article>
+{{ end }}

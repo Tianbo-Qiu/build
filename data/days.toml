@@ -1,0 +1,5 @@
+# Day labels: each colors its days on the About page's calendar.
+[good-coffee]
+name = 'Good coffee day'
+light = '#ecdcc8'
+dark = '#5b4331'

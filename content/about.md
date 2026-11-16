@@ -1,5 +1,6 @@
 +++
 title = 'About'
+layout = 'about'
 +++
 
 Hello, I'm Tianbo Qiu. Currently building software at Tesla.
