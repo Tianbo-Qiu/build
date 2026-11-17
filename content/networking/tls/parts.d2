@@ -1,0 +1,13 @@
+direction: down
+
+ca: "certificate authority\nLab Root CA\nca.key, kept secret"
+server: "server web" {
+  grid-columns: 2
+  grid-gap: 24
+  crt: "web.crt\nname web\npublic key"
+  key: "web.key\nprivate key,\nkept secret"
+}
+store: "client's trust store\ncopy of ca.crt"
+
+ca -> server: "signs web.crt"
+server -> store: "sends web.crt,\nchecked against"

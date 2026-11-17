@@ -1,0 +1,12 @@
+direction: down
+
+shares: "key shares\nnew each connection"
+secret: "shared secret\nnever sent"
+hs: "handshake keys\nencrypt Certificate\nto Finished"
+app: "application keys\nencrypt HTTP"
+sign: "web.key\nsigns the handshake"
+
+shares -> secret: "key exchange"
+secret -> hs: "derive"
+hs -> app: "derive"
+sign -> hs: "proves the server\nholds the key" {style.stroke-dash: 4}

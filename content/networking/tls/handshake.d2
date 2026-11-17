@@ -1,0 +1,21 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(** -> **)[*].style.font-size: 26
+
+client: "client"
+web: "server web"
+
+tcp: "TCP, 1 round trip" {
+  client -> web: "SYN"
+  web -> client: "SYN-ACK"
+}
+tls: "TLS 1.3, 1 round trip" {
+  client -> web: "ClientHello: name web,\nkey share, cipher suites"
+  web -> client: "ServerHello: key share, chosen suite"
+  web -> client: "encrypted: Certificate,\nCertificateVerify, Finished"
+  client -> web: "ACK + encrypted: Finished"
+}
+http: "HTTP, encrypted" {
+  client -> web: "GET / HTTP/1.1"
+  web -> client: "HTTP/1.0 200 ok"
+}
