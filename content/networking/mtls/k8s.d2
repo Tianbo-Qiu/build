@@ -1,0 +1,9 @@
+direction: down
+
+kubectl: "kubectl\nCN=kubernetes-admin\nO=kubeadm:cluster-admins"
+api: "API server\napiserver.crt\ntrusts ca.crt for clients"
+kubelet: "kubelet on kind-worker\nclient: CN=system:node:kind-worker\nserver: kubelet.crt,\nmade by the kubelet itself"
+
+kubectl -> api: "mTLS"
+kubelet -> api: "mTLS"
+api -> kubelet: "client cert, but kubelet.crt\nnot checked by default" {style.stroke-dash: 4}

@@ -1,0 +1,13 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(** -> **)[*].style.font-size: 26
+
+client: "client"
+web: "server web"
+
+client -> web: "ClientHello"
+web -> client: "ServerHello"
+web -> client: "encrypted: CertificateRequest (new),\nCertificate, CertificateVerify, Finished"
+client -> web: "encrypted: Certificate (new),\nCertificateVerify (new), Finished"
+client -> web: "GET / HTTP/1.1"
+web -> client: "checked client: reply,\nrejected client: alert"

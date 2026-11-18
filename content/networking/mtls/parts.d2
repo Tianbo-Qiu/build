@@ -1,0 +1,15 @@
+direction: down
+
+ca: "certificate authority\nLab Root CA"
+client: "client" {
+  id: "client.crt + client.key\nname: client"
+  store: "trusts ca.crt\nfor servers"
+  id -> store: {style.opacity: 0}
+}
+server: "server web" {
+  id: "web.crt + web.key\nname: web"
+  store: "trusts ca.crt\nfor clients"
+  id -> store: {style.opacity: 0}
+}
+ca -> client: "signs client.crt"
+ca -> server: "signs web.crt"
