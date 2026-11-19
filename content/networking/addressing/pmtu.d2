@@ -1,0 +1,12 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(** -> **)[*].style.font-size: 26
+
+client: "client"
+router: "router\nlan2 MTU\n1400"
+server: "server"
+
+client -> router: "1,500 bytes,\ndon't fragment"
+router -> client: "ICMP: fragmentation\nneeded, MTU 1400"
+client -> router: "1,400 bytes"
+router -> server: "1,400 bytes"

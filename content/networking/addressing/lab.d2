@@ -1,0 +1,15 @@
+direction: down
+
+lan1: "lan1 10.20.1.0/24\nfd00:20:1::/64" {
+  grid-columns: 2
+  grid-gap: 16
+  client: "client\n10.20.1.10\nfd00:20:1::10"
+  peer: "peer\n10.20.1.11\nfd00:20:1::11"
+  gw: "Docker gateway\n10.20.1.1"
+}
+router: "router\n10.20.1.254\n10.20.2.254"
+lan2: "lan2 10.20.2.0/24" {
+  server: "server\n10.20.2.20"
+}
+lan1 -- router
+router -- lan2
