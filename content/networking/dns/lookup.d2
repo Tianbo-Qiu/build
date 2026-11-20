@@ -1,0 +1,18 @@
+shape: sequence_diagram
+**.style.font-size: 30
+(** -> **)[*].style.font-size: 26
+
+stub: "client\n(stub resolver)"
+rec: "recursive\nresolver"
+root: "root server"
+tld: "com server"
+auth: "example.com server\n(Cloudflare)"
+
+stub -> rec: "www.example.com A?"
+rec -> root: "www.example.com A?"
+root -> rec: "ask com: a–m.gtld-servers.net"
+rec -> tld: "www.example.com A?"
+tld -> rec: "ask hera, elliott\n.ns.cloudflare.com"
+rec -> auth: "www.example.com A?"
+auth -> rec: "A 104.20.23.154,\n172.66.147.243, TTL 300"
+rec -> stub: "answer, now cached\nfor 300 s"
