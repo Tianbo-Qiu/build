@@ -1,0 +1,11 @@
+direction: down
+
+r1: "r1\nto 203.0.113.1"
+r2: "r2"
+r3: "r3, AS 65003\nannounces /25\ndrops it"
+r4: "r4, AS 65004\nannounces\n203.0.113.0/24"
+
+r1 -> r3: "/25: longer\nmatch wins"
+r1 -> r2: "/24" {style.stroke-dash: 4}
+r2 -> r4: "/24" {style.stroke-dash: 4}
+(* -> *)[*].style.font-size: 22
