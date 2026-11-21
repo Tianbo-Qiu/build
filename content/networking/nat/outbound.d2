@@ -1,0 +1,10 @@
+direction: down
+
+l1: "laptop\n192.168.50.10"
+l2: "laptop2\n192.168.50.11"
+router: "router\n192.168.50.254\n203.0.113.2"
+server: "server\n203.0.113.80"
+
+l1 -> router: "from :40002"
+l2 -> router: "from :40002"
+router -> server: "from 203.0.113.2:20358\nand 203.0.113.2:40002"

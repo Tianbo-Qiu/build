@@ -1,0 +1,10 @@
+direction: down
+
+pod: "client pod\nto 10.96.6.249:80"
+svc: "KUBE-SVC chain\nfor Service natweb"
+a: "KUBE-SEP\nDNAT to 10.244.1.10:80"
+b: "KUBE-SEP\nDNAT to 10.244.2.15:80"
+
+pod -> svc: "KUBE-SERVICES\nmatches the cluster IP"
+svc -> a: "probability 0.5"
+svc -> b: "otherwise"
