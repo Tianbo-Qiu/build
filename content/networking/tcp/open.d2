@@ -1,0 +1,17 @@
+shape: sequence_diagram
+(** -> **)[*].style.font-size: 24
+
+client: "client :53010"
+server: "server :7000"
+
+open: "handshake, 1 round trip" {
+  client -> server: "SYN seq=2551007285\nMSS 1460, SACK, WS, TS"
+  server -> client: "SYN-ACK seq=2648549757\nack=2551007286"
+  client -> server: "ACK ack=2648549758"
+}
+data: "data, numbers relative" {
+  client -> server: "seq=1: hi (3 bytes)"
+  server -> client: "ack=4"
+  server -> client: "seq=1: HELLO hi (9 bytes)"
+  client -> server: "ack=10"
+}

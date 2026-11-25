@@ -1,0 +1,10 @@
+shape: sequence_diagram
+(** -> **)[*].style.font-size: 24
+
+client: "client :53010"
+server: "server :7000"
+
+client -> server: "FIN seq=4"
+server -> client: "FIN seq=10, ack=5"
+client -> server: "ack=11"
+client -> client: "TIME_WAIT, 60 s"

@@ -1,0 +1,14 @@
+direction: down
+
+proc: "process: connect, send, recv, close"
+kernel: "kernel" {
+  grid-rows: 2
+  grid-gap: 24
+  sock: "socket: file descriptor,\nsend and receive buffers"
+  tcp: "TCP: handshake, ACKs,\ntimers, retransmission"
+  ip: "IP: routing, ARP"
+  dev: "device queue: tc netem,\nsegmentation offload"
+}
+nic: "network interface"
+proc -> kernel: "system calls"
+kernel -> nic: "packets"

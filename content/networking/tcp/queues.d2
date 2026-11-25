@@ -1,0 +1,15 @@
+direction: down
+
+listen: "listening socket, port 7000" {
+  grid-rows: 1
+  grid-gap: 24
+  syn: "SYN queue\nhandshakes in progress"
+  acc: "accept queue\nconnections ready\nup to backlog + 1"
+}
+conn: "connection" {
+  grid-rows: 1
+  grid-gap: 24
+  snd: "send buffer\nwritten, not yet ACKed"
+  rcv: "receive buffer\narrived, not yet read\nfree space = window"
+}
+listen -> conn: "accept()"

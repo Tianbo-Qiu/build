@@ -1,0 +1,28 @@
+(** -> **)[*].style.font-size: 24
+grid-columns: 2
+grid-gap: 40
+
+c: "the side that closes first" {
+  direction: down
+  a: "SYN_SENT"
+  b: "ESTABLISHED"
+  f1: "FIN_WAIT_1"
+  f2: "FIN_WAIT_2"
+  tw: "TIME_WAIT, 60 s"
+  a -> b: "SYN-ACK"
+  b -> f1: "close(): send FIN"
+  f1 -> f2: "ACK of FIN"
+  f2 -> tw: "peer's FIN"
+}
+s: "the other side" {
+  direction: down
+  l: "LISTEN"
+  r: "SYN_RECV"
+  e: "ESTABLISHED"
+  cw: "CLOSE_WAIT"
+  la: "LAST_ACK"
+  l -> r: "SYN"
+  r -> e: "ACK"
+  e -> cw: "peer's FIN:\nread returns EOF"
+  cw -> la: "close(): send FIN"
+}
